@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+
+<struts>
+	<!-- 开发模式设置成false -->
+	<constant name="struts.devMode" value="false" />
+
+	<package name="pethome" extends="struts-default" namespace="/">
+		<!-- 配置访问首页的Action -->
+		<!-- 此时将Action交给Spring管理，这里的class是applicationContext.xml中的id -->
+		<action name="index" class="indexAction">
+			<result name="index">/WEB-INF/jsp/index.jsp</result>
+		</action>
+
+		<action name="goods_*" class="goodsAction" method="{1}">
+			<result name="findDetailGoods">/WEB-INF/jsp/detailGoods.jsp</result>
+			<result name="findGoodsByScid">/WEB-INF/jsp/goodsInFrontByScid.jsp</result>
+		</action>
+	</package>
+</struts>

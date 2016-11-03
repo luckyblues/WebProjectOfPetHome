@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Category配置映射文件 -->
+<hibernate-mapping>
+	<class name="cn.pethome.category.domain.Category" table="category">
+		<!-- 一级分类主键 -->
+		<id name="cid" column="cid">
+			<!-- 主键生成策略 -->
+			<generator class="native" />
+		</id>
+		<!-- 一级分类的名字 -->
+		<property name="cname" column="cname" />
+		<!-- set集合的name值为Category类中的要关联的属性   ,,默认是延迟加载，所以要设置lazy=false-->
+		<set name="categorySeconds" lazy="false" order-by="scid">
+			<!-- 外键 -->
+			<key column="category" />
+			<!-- 对应二级分类的类的全路径 -->
+			<one-to-many class="cn.pethome.categorysecond.domain.CategorySecond" />
+		</set>
+	</class>
+
+</hibernate-mapping>

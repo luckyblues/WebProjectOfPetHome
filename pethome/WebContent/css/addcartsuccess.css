@@ -1,0 +1,117 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+
+body {
+	background: #f5f5f5;
+}
+
+.add-succ-box {
+	width: 1226px;
+	height: 350px;
+	background: #FFF;
+	margin: 100px auto;
+	box-shadow: 0 0 18px #DDD;
+	-webkit-box-shadow: 0 0 18px #DDD;
+	-moz-box-shadow: 0 0 18px #DDD;
+	-ms-box-shadow: 0 0 18px #DDD;
+	-o-box-shadow: 0 0 18px #DDD;
+}
+
+.goods-content-left {
+	width: 550px;
+	height: 200px;
+	margin-top: 100px;
+	margin-left: 100px;
+	float: left;
+}
+/*商品图片*/
+.goods-content-left .goods-img {
+	width: 110px;
+	height: 110px;
+	float: left;
+}
+
+.goods-content-left .goods-info {
+	width: 420px;
+	height: 110px;
+	float: right;
+}
+/*商品名字*/
+.goods-info .name {
+	font-size: 18px;
+	color: #666;
+}
+/*商品价格*/
+.goods-info .price {
+	font-size: 18px;
+	padding-left: 15px;
+	color: #666;
+}
+/*商品信息*/
+.goods-info h3 {
+	font-size: 20px;
+	font-weight: normal;
+	padding-top: 40px;
+	color: #F36;
+}
+
+.add-succ-box .action-right {
+	width: 400px;
+	height: 50px;
+	float: right;
+	margin-right: 50px;
+	margin-top: 125px;
+}
+
+.btn {
+	display: inline-block;
+}
+/*继续购物按钮*/
+.action-right .btn-goshopping {
+	float: left;
+}
+/*继续购物按钮悬浮*/
+.btn-goshopping:hover {
+	float: left;
+	color: #f03;
+	box-shadow: 0 0 4px #DDD;
+	transform: translateY(-1px);
+}
+
+.action-right a {
+	width: 180px;
+	height: 50px;
+	line-height: 50px;
+	display: block;
+	font-size: 16px;
+	text-decoration: none;
+	font-weight: normal;
+	color: #757575;
+	text-align: center;
+	border-color: #b0b0b0;
+	border: 1px solid #b0b0b0;
+	cursor: pointer;
+}
+/*购物车结算按钮*/
+.action-right .btn-gopaying {
+	float: right;
+	background: #F03;
+	color: #fff;
+	border-color: #f0f0f0;
+	border: 1px solid #f0f0f0;
+}
+/*购物车结算按钮鼠标悬浮后的效果*/
+.action-right .btn-gopaying:hover {
+	float: right;
+	background: #F03;
+	color: #fff;
+	border-color: #f03;
+	border: 1px solid #f03;
+	box-shadow: 0 0 1px #f03;
+	transform: translateY(-1px);
+}

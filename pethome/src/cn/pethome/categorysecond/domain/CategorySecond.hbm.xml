@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- CategorySecond配置映射文件 -->
+<hibernate-mapping>
+	<class name="cn.pethome.categorysecond.domain.CategorySecond"
+		table="categorysecond">
+		<id name="scid" column="scid">
+			<generator class="native" />
+		</id>
+
+		<property name="scimg" column="scimg" />
+		<property name="scname" column="scname" />
+		<!-- 多个二级分类属于一个一级分类，name值取本类中的相关联的属性名字 class取所关联的类的全路径 -->
+		<many-to-one name="category" class="cn.pethome.category.domain.Category" />
+		<!-- 一对多关系 -->
+		<set name="goodlist" lazy="false" order-by="gid">
+			<key column="categorySecond" />
+			<one-to-many class="cn.pethome.goods.domain.Goods" />
+		</set>
+	</class>
+
+
+</hibernate-mapping>

@@ -1,0 +1,165 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+	font-size: 16px;
+}
+
+/*我的账户页面*/
+.my-account-box {
+	width: 100%;
+	height: 800px;
+	background: #f0f0f0;
+}
+
+/*返回到首页样式*/
+.my-account-box .back {
+	width: 1226px;
+	height: 40px;
+	line-height: 40px;
+	background: #f0f0f0;
+	margin: 0px auto;
+}
+
+.back a {
+	font-size: 15px;
+	color: #333;
+	text-align: left;
+	text-decoration: none;
+}
+
+.back a:hover {
+	color: #f03;
+}
+
+.back span {
+	width: 100px;
+	height: 40px;
+	font-size: 15px;
+	color: #333;
+}
+
+.my-account-box .row {
+	width: 1226px;
+	height: auto;
+	margin: 0px auto;
+	background: #f5f5f5;
+}
+
+.row .span-left {
+	width: 250px;
+	height: auto;
+	background: #FFF;
+	float: left;
+	box-shadow: 0 0 18px #DDD;
+	-webkit-box-shadow: 0 0 18px #DDD;
+	-moz-box-shadow: 0 0 18px #DDD;
+	-ms-box-shadow: 0 0 18px #DDD;
+	-o-box-shadow: 0 0 18px #DDD;
+}
+
+/*左侧我的账户分类*/
+.span-left .uc-nav-box {
+	width: 250px;
+	height: auto;
+	background: #FFF;
+}
+
+.uc-nav-box .uc-nav-head {
+	width: 250px;
+	height: 52px;
+	line-height: 52px;
+	/*	background:#f03;*/
+}
+
+.uc-nav-head h3 {
+	font-size: 16px;
+	font-weight: normal;
+	color: #F00;
+	text-align: center;
+	/*border-bottom:1px solid #DDD;*/
+}
+
+.uc-nav-box .uc-nav-body {
+	width: 250px;
+	height: auto;
+	border-bottom: 1px solid #DDD;
+}
+
+.uc-nav-body a {
+	display: block;
+	width: 250px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	color: #757575;
+	font-size: 15px;
+	text-decoration: none;
+}
+
+.uc-nav-body a:hover {
+	color: #60C;
+}
+
+.row .span-right {
+	width: 960px;
+	height: 700px;
+	background: #FFF;
+	float: right;
+	box-shadow: 0 0 18px #DDD;
+	-webkit-box-shadow: 0 0 18px #DDD;
+	-moz-box-shadow: 0 0 18px #DDD;
+	-ms-box-shadow: 0 0 18px #DDD;
+	-o-box-shadow: 0 0 18px #DDD;
+}
+
+.span-right .uc-main-box {
+	width: 960px;
+	height: 700px;
+}
+
+.uc-main-box .order-list-box {
+	width: 880px;
+	height: auto;
+	background: #f0f0f0;
+	margin: 0 auto;
+}
+
+.order-list-box .order-head {
+	width: 880px;
+	height: 100px;
+	background: #fff;
+}
+
+.order-head h1 {
+	margin-top: 20px;
+	color: #757575;
+	font-size: 25px;
+	font-weight: normal;
+	line-height: 68px;
+}
+
+.order-head small {
+	margin-left: 10px;
+	font-size: 12px;
+	line-height: 10px;
+}
+
+.order-head .more {
+	width: 880px;
+	height: 56px;
+}
+
+.more h2 {
+	font-size: 16px;
+	font-weight: normal;
+	color: #f03;
+}
+
+.order-list-box .order-body {
+	width: 880px;
+	height: 400px;
+	background: #ccc;
+}

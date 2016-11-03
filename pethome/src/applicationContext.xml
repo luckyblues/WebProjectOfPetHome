@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+	<!-- 1.配置连接池: -->
+
+
+	<!-- 引入外部属性文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	<!-- 配置C3P0连接池: -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<!-- 连接mysql驱动 -->
+		<property name="driverClass" value="${jdbc.driver}" />
+		<!-- 连接到本地数据库 -->
+		<property name="jdbcUrl" value="${jdbc.url}" />
+		<!-- 连接到数据库用户名 -->
+		<property name="user" value="${jdbc.user}" />
+		<!-- 连接密码 -->
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+
+
+
+	<!-- 2.配置Hibernate的相关信息 -->
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<!-- 注入连接池 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 配置Hibernate的其他的属性 -->
+		<property name="hibernateProperties">
+			<props>
+				<!-- 数据库方言这里是mysql -->
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<!-- 如果为true在控制台显示sql -->
+				<prop key="hibernate.show_sql">true</prop>
+				<!-- 如果为true则会格式化sql -->
+				<prop key="hibernate.format_sql">true</prop>
+				<!-- Hibernate的事务实现就是通过在事务开始时设置auto commit为false -->
+				<prop key="hibernate.connection.autocommit">false</prop>
+				<!-- update最常用的属性，第一次加载hibernate时根据model类会自动建立起表的结构（前提是先建立好数据库） ，以后加载hibernate时根据 
+					model类自动更新表结构，即使表结构改变了但表中的行仍然存在不会删除以前的行。要注意的是当部署到服务器后，表结构是不会被马上建立起来的，是要等 
+					应用第一次运行起来后才会。 -->
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+
+
+
+		<!-- 配置Hibernate的映射文件 -->
+		<property name="mappingResources">
+			<list>
+				<value>cn/pethome/category/domain/Category.hbm.xml</value>
+				<value>cn/pethome/goods/domain/Goods.hbm.xml</value>
+				<value>cn/pethome/categorysecond/domain/CategorySecond.hbm.xml
+				</value>
+			</list>
+		</property>
+
+	</bean>
+
+
+
+	<!-- 事务管理 -->
+	<!-- 事务管理器 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 开启注解事务 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+
+
+
+	<!--================= Action的配置 -->
+
+	<bean id="indexAction" class="cn.pethome.index.action.IndexAction"
+		scope="prototype">
+		<property name="categoryService" ref="categoryService" />
+		<property name="goodsService" ref="goodsService" />
+	</bean>
+
+
+	<!-- 商品Action的配置 -->
+	<bean id="goodsAction" class="cn.pethome.goods.action.GoodsAction"
+		scope="prototype">
+		<property name="goodsService" ref="goodsService" />
+	</bean>
+
+
+
+	<!-- ======================Service的配置 -->
+
+
+	<!-- 一级分类的Service层注入 -->
+	<bean id="categoryService" class="cn.pethome.category.service.CategoryService">
+		<!-- 在Categoryservice中注入CategoryDao -->
+		<property name="categoryDao" ref="categoryDao" />
+	</bean>
+
+	<!-- GoodsService层注入 -->
+	<bean id="goodsService" class="cn.pethome.goods.service.GoodsService">
+		<!-- 在 goodsService中注入GoodsDao -->
+		<property name="goodsDao" ref="goodsDao" />
+	</bean>
+
+
+
+
+	<!-- ==================Dao的配置 -->
+
+
+	<!-- 一级分类的Dao层注入 -->
+	<bean id="categoryDao" class="cn.pethome.category.dao.CategoryDao">
+		<!-- 注入sessionFactory -->
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- GoodsDao层注入 -->
+	<bean id="goodsDao" class="cn.pethome.goods.dao.GoodsDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+
+</beans>
