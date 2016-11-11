@@ -92,7 +92,7 @@
 	width: 350px;
 	height: 100px;
 	font-weight: normal;
-	padding-top: 20px;
+	padding-top: 40px;
 	font-size: 16px;
 	/*	background:#093;*/
 	color: #757575;
@@ -107,29 +107,49 @@
 	margin-top: 30px;
 }
 
-.goods-right span {
-	font-size: 28px;
-	font-weight: normal;
-	color: #F03;
-	padding-left: 20px;
-}
 
-.goods-right a {
+.goods-right #addto,#tobuy{
+	
 	display: block;
-	width: 300px;
+	width: 230px;
 	height: 60px;
+	float:left;
 	line-height: 60px;
 	color: #FFF;
 	background: #F03;
 	text-decoration: none;
 	border: 1px solid #f03;
 	margin-left: 20px;
-	margin-top: 30px;
+	margin-top: 50px;
 	text-align: center;
 	font-size: 17px;
 }
+.goods-right h4{
+	width: 400px;
+	height: 30px;
+}
+.goods-right span{
+	font-size:28px;
+	font-weight:normal;
+	color:#F03;
+	padding-left:20px;
+}
+.goods-right .count{
+	font-size:14px;
+	color:#434343;
+	margin-left: 5px;
+	
+}
+.goods-right input{
+	width:40px;
+	height:25px;
+	text-align:center;
+	font-size:14px;
+	color:#434343;
+	margin-left: 5px;
 
-.goods-right a:hover {
+}
+.goods-right #addto:hover,,#tobuy:hover{
 	transform: translateY(-1px);
 	box-shadow: 4px 4px 4px #DDD;
 }

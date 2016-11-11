@@ -10,7 +10,6 @@
 .allhead-box {
 	width: 100%;
 	height: 100px;
-
 }
 /*site-topbar头部导航*/
 .site-topbar {
@@ -20,7 +19,7 @@
 }
 
 .container {
-	width: 1226px;
+	width: 1228px;
 	margin: 0 auto;
 	height: 40px;
 }
@@ -83,9 +82,7 @@
 	width: 1226px;
 	height: 80px;
 	margin: 0 auto;
-	/*	box-shadow:0 0 8px #DDD;
-	-webkit-box-shadow:0 0 8px #DDD;
-	-moz-box-shadow:0 0 8px #DDD;*/
+	border-bottom: 1px solid #ddd;
 }
 
 .head-logo {
@@ -93,7 +90,8 @@
 	width: 230px;
 	height: 80px;
 	line-height: 8px;
-	border: 1px solid #DDD;
+	border-left: 1px solid #DDD;
+	border-right: 1px solid #DDD;
 	float: left;
 }
 
@@ -156,15 +154,15 @@
 
 .head-search {
 	display: block;
-	width: 350px;
-	height: 50px;
+	width: 340px;
+	height: 52px;
 	float: right;
 	margin-top: 15px;
 	border: 1px solid #f10180;
 }
 
 .search-text {
-	width: 300px;
+	width: 310px;
 	height: 50px;
 	border: 1px solid #f10180;
 }
@@ -177,26 +175,26 @@
 }
 
 .search-form input:hover {
-	color: #fff;
+	color: #f03;
 }
 
 .site-header .search-btn {
 	position: absolute;
-	right: 62px;;
-	top: 56px;
-	width: 50px;
-	height: 50px;
-	font-size: 24px;
-	line-height: 24px;
-	background: #FFF;
-	color: #616161;
-	border: 1px solid #CCC;
+	right: 60px;
+	top: 55px;
+	width: 55px;
+	height: 54px;
+	font-size: 22px;
+	line-height: 53px;
+	background: #f10180;
+	color: #fff;
+	border: 1px solid #f10180;
 }
 
 .site-header .search-btn:hover {
-	display: block;
-	background-color: #f10180;
-	border: 1px solid #757575;
+	box-shadow: 0 0 8px #ddd;
+	-webkit-box-shadow: 0 0 8px #ddd;
+	-moz-box-shadow: 0 0 8px #ddd;
 }
 
 .site-topmenu {
@@ -207,7 +205,7 @@
 }
 
 .topmenu-container {
-	width: 1002px;
+	width: 1222px;
 	height: 452px;
 	display: inline-block;
 }
@@ -267,7 +265,7 @@
 }
 
 .site-topmenu .home-slider {
-	width: 770px;
+	width: 990px;
 	height: 452px;
 	background: #63F;
 	overflow: hidden;
@@ -275,7 +273,7 @@
 }
 
 .home-banner {
-	width: 770px;
+	width: 990px;
 	height: 452px;
 	background: #0C9;
 }
@@ -286,7 +284,7 @@
 	height: 25px;
 	float: right;
 	top: 530px;
-	left: 560px;
+	left: 650px;
 }
 /*小圆点轮播图*/
 .buttons span {
@@ -348,7 +346,7 @@
 }
 
 #next {
-	right: 290px;
+	right: 70px;
 	font-size: 35px;
 	font-weight: normal;
 	color: #f5f5f5;
@@ -358,27 +356,6 @@
 	display: block;
 	box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
 	-webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.4);
-}
-
-.home-right {
-	width: 220px;
-	height: 450px;
-	position: relative;
-	float: right;
-}
-
-.home-right a {
-	width: 220px;
-	height: 149px;
-	display: block;
-	border: 1px solid #DDD;
-}
-
-.home-right  img {
-	display: block;
-	margin: 0 auto;
-	width: 210px;
-	height: 148px;
 }
 
 .submenu {
@@ -393,7 +370,6 @@
 	top: 160px;
 	left: 293px;
 	z-index: 3;
-	/*border:1px solid #E53935;*/
 }
 /*二级菜单*/
 .leftmenu {
@@ -490,7 +466,7 @@
 .goods-box .box-head h2 {
 	font-size: 21px;
 	font-weight: normal;
-	color: #333;
+	color: #f10180;
 	line-height: 50px;
 	padding-left: 20px;
 	float: left;
@@ -522,6 +498,7 @@
 
 .category2-list li a:hover {
 	color: #f33;
+	border-bottom: 1px solid #f33;
 }
 
 .page-main .box-body {
@@ -598,4 +575,19 @@
 /*鼠标以上商品时，出现描述信息*/
 .goods-list li:hover .hidden {
 	top: 250px;
+}
+
+.top {
+	display: none;
+	width: 50px;
+	height: 50px;
+	background: #f33;
+	font-size: 13px;
+	text-align: center;
+	text-decoration: none;
+	color: #fff;
+	right: 10px;
+	bottom: 50px;
+	position: fixed;
+	padding-top: 12px;
 }

@@ -15,9 +15,21 @@
 			<result name="index">/WEB-INF/jsp/index.jsp</result>
 		</action>
 
+
+
 		<action name="goods_*" class="goodsAction" method="{1}">
 			<result name="findDetailGoods">/WEB-INF/jsp/detailGoods.jsp</result>
 			<result name="findGoodsByScid">/WEB-INF/jsp/goodsInFrontByScid.jsp</result>
+			<result name="findGoodsByCid">/WEB-INF/jsp/goodsInFrontByCid.jsp</result>
+			<result name="findHotGoods">/WEB-INF/jsp/index.jsp</result>
+		</action>
+
+
+		<action name="cart_*" class="cartAction" method="{1}">
+			<result name="mycart">/WEB-INF/jsp/goodslistcart.jsp</result>
+			<result name="addtoCart">/WEB-INF/jsp/goodslistcart.jsp</result>
+			<result name="deleteOneCartItem">/WEB-INF/jsp/goodslistcart.jsp</result>
+			<result name="deleteAll">/WEB-INF/jsp/goodslistcart.jsp</result>
 		</action>
 	</package>
 </struts>

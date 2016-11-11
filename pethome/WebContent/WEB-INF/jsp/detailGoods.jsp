@@ -9,12 +9,16 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath }/css/detail_goodsinfo.css" />
 <link rel="shortcut icon"
-	href="${pageContext.request.contextPath }/images/icon175x175.png " />
-
+	href="${pageContext.request.contextPath }/images/icon.png " />
+<script>
+	function saveCart() {
+		document.getElementById("submitForm").submit();
+	}
+</script>
 </head>
 
 <body>
-<%@include file="head.jsp" %>
+	<%@include file="head.jsp"%>
 	<!--具体商品页面-->
 	<div class="goods-box">
 		<div class="back">
@@ -22,33 +26,45 @@
 		</div>
 		<div class="goods-detail">
 			<div class="goods-detail-info">
-				<div class="goods-container">
-					<div class="goods-left">
-						<div class="big-goods-pic">
-							<img
-								src="${pageContext.request.contextPath }/images/goodsImage/<s:property value="model.gimage"/>"
-								width="200px" height="200px" />
+				<form
+					action="${pageContext.request.contextPath }/cart_addtoCart.action"
+					method="post" id="submitForm">
+					<input type="hidden" name="gid"
+						value="<s:property value="model.gid"/>" />
+					<div class="goods-container">
+						<div class="goods-left">
+							<div class="big-goods-pic">
+								<img
+									src="${pageContext.request.contextPath }/images/goodsImage/<s:property value="model.gimage"/>"
+									width="200px" height="200px" />
+							</div>
+							<div class="small-goods-pic">
+								<img
+									src="${pageContext.request.contextPath }/images/goodsImage/<s:property value="model.gimage"/>"
+									width="100px" height="100px" />
+							</div>
 						</div>
+						<div class="goods-right">
+							<h1>
+								<s:property value="model.gname" />
+							</h1>
+							<h2>
+								<s:property value="model.gdesc" />
+							</h2>
+							<h3>
+								<span><s:property value="model.gprice" /></span>元
+							</h3>
+							<h4>
+								<span class="count">购买数量：</span> <input type="text" name="num"
+									value="1" maxlength="3" />
+							</h4>
+							<input id="addto" type="button" onclick="saveCart()"
+								value="加入购物车" /> <input id="tobuy" type="button"
+								onclick="goingtobuy()" value="立即购买" />
 
-						<div class="small-goods-pic">
-							<img
-								src="${pageContext.request.contextPath }/images/goodsImage/<s:property value="model.gimage"/>"
-								width="100px" height="100px" />
 						</div>
 					</div>
-					<div class="goods-right">
-						<h1>
-							<s:property value="model.gname" />
-						</h1>
-						<h2>
-							<s:property value="model.gdesc" />
-						</h2>
-						<h3>
-							<span><s:property value="model.gprice" /></span>元
-						</h3>
-						<a href="#">加入购物车</a>
-					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 	</div>

@@ -24,8 +24,6 @@ public class CategoryDao extends HibernateDaoSupport {
 	public List<Category> findAllCategory() {
 		String hql = "from Category";
 		List<Category> clist = this.getHibernateTemplate().find(hql);
-		// ¥Ê»Îsession÷–
-		ActionContext.getContext().getSession().put("clist", clist);
 		return clist;
 
 	}

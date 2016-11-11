@@ -23,12 +23,12 @@ public class CategoryService {
 
 	/**
 	 * 调用categoryDao里面的方法
+	 * 
 	 * @return
 	 */
 	public List<Category> findAllCategory() {
-		List<Category> list=categoryDao.findAllCategory();
-		return null;
+		List<Category> list = categoryDao.findAllCategory();
+		return list;
 	}
-	
 
 }

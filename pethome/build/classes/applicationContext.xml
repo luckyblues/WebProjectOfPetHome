@@ -87,11 +87,10 @@
 
 
 	<!--================= Action的配置 -->
-
+	<!-- 首页Action的配置 -->
 	<bean id="indexAction" class="cn.pethome.index.action.IndexAction"
 		scope="prototype">
 		<property name="categoryService" ref="categoryService" />
-		<property name="goodsService" ref="goodsService" />
 	</bean>
 
 
@@ -101,7 +100,11 @@
 		<property name="goodsService" ref="goodsService" />
 	</bean>
 
-
+	<!-- 购物车Action的配置 -->
+	<bean id="cartAction" class="cn.pethome.cart.action.CartAction"
+		scope="prototype">
+		<property name="goodsService" ref="goodsService" />
+	</bean>
 
 	<!-- ======================Service的配置 -->
 

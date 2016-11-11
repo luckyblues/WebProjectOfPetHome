@@ -23,20 +23,6 @@ public class GoodsService {
 	}
 
 	/**
-	 * 根据二级分类的主键查询首页十条商品记录
-	 * 
-	 * @param cid
-	 * 
-	 * @param scid
-	 * 
-	 * @return
-	 */
-	public List<Goods> findHotGoodsByCsid(Integer cid) {
-		List<Goods> hlist = goodsDao.findHotGoodsByScid(cid);
-		return hlist;
-	}
-
-	/**
 	 * 业务逻辑层 根据商品主键查找该商品的具体页面
 	 * 
 	 * @param gid
@@ -61,7 +47,7 @@ public class GoodsService {
 		// 为pageBean对象设置当前页currentpage
 		pageBean.setCurrentPage(currentPage);
 		// 为pageBean对象设置pageSize,即每页显示25条商品数据
-		int pageSize = 25;
+		int pageSize = 12;
 		pageBean.setPageSize(pageSize);
 		// 为pageBean对象设置totalCount总记录数
 		int totalCount = goodsDao.findGoodsCount(scid);
@@ -85,6 +71,67 @@ public class GoodsService {
 		List<Goods> glist = goodsDao.findGoodsByScid(scid, startIndex, pageSize);
 		pageBean.setList(glist);
 		// 将封装好的pageBean对象返回
+		return pageBean;
+	}
+
+	public PageBean findGoodsByCid(Integer cid, Integer currentPage) {
+		// 创建一个PageBean对象
+		PageBean<Goods> pageBean = new PageBean<>();
+		// 封装pageBean对象的属性
+		// 封装当前页属性
+		pageBean.setCurrentPage(currentPage);
+		// 封装每页显示商品数量
+		int pageSize = 15;
+		pageBean.setPageSize(pageSize);
+
+		// 封装数据库中以及分类下的商品总记录数
+		int totalCount = goodsDao.findCountByCid(cid);
+		pageBean.setTotalCount(totalCount);
+		// 封装总页数
+		int totalPage;
+		if (totalCount % pageSize == 0) {
+			totalPage = totalCount / pageSize;
+		} else {
+			totalPage = totalCount / pageSize + 1;
+		}
+		pageBean.setTotalPage(totalPage);
+		// 每一页的第一条数据是几
+		int startIndex = (currentPage - 1) * pageSize;
+
+		// 分页查询的方法,返回的是List类型
+		List<Goods> list = goodsDao.findGoodsByCid(cid, startIndex, pageSize);
+		pageBean.setList(list);
+		return pageBean;
+	}
+
+	/**
+	 * 根据二级分类的名字查询首页十条商品记录
+	 * 
+	 * @param cid
+	 * 
+	 * @param scid
+	 * @param currentPage
+	 * 
+	 * @return
+	 */
+	public PageBean findHotGoodsByscid(Integer scid, Integer currentPage) {
+		PageBean pageBean = new PageBean();
+		pageBean.setCurrentPage(currentPage);
+		int pageSize = 10;
+		pageBean.setPageSize(pageSize);
+
+		int totalCount = goodsDao.findHotGoodsCount(scid);
+		pageBean.setTotalCount(totalCount);
+		int totalPage;
+		if (totalCount % pageSize == 0) {
+			totalPage = totalCount / pageSize;
+		} else {
+			totalPage = totalCount / pageSize + 1;
+		}
+		pageBean.setTotalPage(totalPage);
+		int startIndex = (currentPage - 1) * pageSize;
+		List<Goods> hlist = goodsDao.findHotGoodsByScid(scid, startIndex, pageSize);
+		pageBean.setList(hlist);
 		return pageBean;
 	}
 }

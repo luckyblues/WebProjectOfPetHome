@@ -18,7 +18,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
  * @param <T>
  */
 @SuppressWarnings("rawtypes")
-public class PageCallBackImpl implements HibernateCallback {
+public class PageCallBackImpl<T> implements HibernateCallback<List<T>> {
 	// 封装四个参数
 	private String hql;// 当前的hql语句
 	private Object[] params;// 需要传入的参数
@@ -36,10 +36,10 @@ public class PageCallBackImpl implements HibernateCallback {
 	}
 
 	@Override
-	public List doInHibernate(Session session) throws HibernateException, SQLException {
-		// 根据Hibernate中的session调用其方法重载的方法createCriteria（String
+	public List<T> doInHibernate(Session session) throws HibernateException, SQLException {
+		// 根据Hibernate中的session调用其方法重载的方法createQuery（String
 		// value）执行hql，返回Query对象
-		Query query = (Query) session.createCriteria(hql);
+		Query query = session.createQuery(hql);
 
 		// 如果参数不为空，说明查询出结果集，并遍历每个参数对应的对象，
 		if (params != null) {

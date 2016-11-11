@@ -1,5 +1,6 @@
 package cn.pethome.category.domain;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +12,9 @@ import cn.pethome.categorysecond.domain.CategorySecond;
  * @author Administrator
  *
  */
-public class Category {
+public class Category implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private Integer cid;// 一级分类的主键
 	private String cname;// 一级分类的名字
 	// 一级分类下面有很多二级分类，用set集合,并提供get set方法

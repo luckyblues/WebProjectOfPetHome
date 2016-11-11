@@ -23,6 +23,18 @@ public class GoodsAction extends ActionSupport implements ModelDriven<Goods> {
 	private Goods goods = new Goods();
 	// 接受index.jsp传递过来的参数二级分类的scid，并提供get和set方法
 	private Integer scid;
+	// 接受index.jsp中传递过来的一级分类的主键并提供get set方法
+	private Integer cid;
+	// 接受index.jsp传递过来的参数currentPage
+	private Integer currentPage;
+
+	public Integer getCid() {
+		return cid;
+	}
+
+	public void setCid(Integer cid) {
+		this.cid = cid;
+	}
 
 	public Integer getScid() {
 		return scid;
@@ -31,9 +43,6 @@ public class GoodsAction extends ActionSupport implements ModelDriven<Goods> {
 	public void setScid(Integer scid) {
 		this.scid = scid;
 	}
-
-	// 接受index.jsp传递过来的参数currentPage
-	private Integer currentPage;
 
 	public Integer getCurrentPage() {
 		return currentPage;
@@ -76,6 +85,29 @@ public class GoodsAction extends ActionSupport implements ModelDriven<Goods> {
 		// 将结果存到值栈中去,set保存对象,以键值对的形式存储
 		ActionContext.getContext().getValueStack().set("pageBean", pageBean);
 		return "findGoodsByScid";
+	}
 
+	/**
+	 * 根据一级分类的主键查询所有一级分类下的商品
+	 * 
+	 * @return 返回的对象是PageBean对象
+	 */
+
+	public String findGoodsByCid() {
+		PageBean pageBean = goodsService.findGoodsByCid(cid, currentPage);
+		// 把PAgeBean对象保存到值栈中
+		ActionContext.getContext().getValueStack().set("pageBean", pageBean);
+		return "findGoodsByCid";
+
+	}
+
+	public String findHotGoods() {
+		/**
+		 * 查询首页二级分类下的十条的热门商品
+		 */
+		PageBean pageBean = goodsService.findHotGoodsByscid(scid, currentPage);
+		// 将商品信息存入值栈中中，集合一般存在set中，对象一般存在push中
+		ActionContext.getContext().getValueStack().set("pageBean", pageBean);
+		return "findHotGoods";
 	}
 }

@@ -12,7 +12,7 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/js/main_page.js"></script>
 <link rel="shortcut icon"
-	href="${pageContext.request.contextPath }/images/icon175x175.png " />
+	href="${pageContext.request.contextPath }/images/icon.png " />
 
 </head>
 </head>
@@ -28,10 +28,9 @@
 					href="#">建议</a>
 				</span>
 				<!--右边内容部分-->
-				<span class="topbar-info"> <a href="#">购物车(<em
-						class="cart_num">0</em>)
-				</a> <a href="#">消息通知</a> <a href="#">退出</a> <a href="#">注册</a> <a
-					href="#">登录</a>
+				<span class="topbar-info"> <a
+					href="${pageContext.request.contextPath }/cart_mycart.action">购物车
+				</a> <a href="#">退出</a> <a href="#">注册</a> <a href="#">登录</a>
 				</span>
 			</div>
 		</div>
@@ -40,7 +39,7 @@
 			<div class="container">
 				<!--      logo部分-->
 				<div class="head-logo">
-					<a href="main_page.html"><img
+					<a href="index.action"><img
 						src="${pageContext.request.contextPath }/images/pethome.png"
 						title="pethome" width="230px" height="80px" /></a>
 				</div>
@@ -57,9 +56,10 @@
 				<!--     搜索-->
 				<div class="head-search">
 					<form class="search-form" action="search" method="get">
-						<input class="search-text" type="search" /> <input
-							class="search-btn" type="submit" value="搜索"
-							style="font-size: 16px" />
+						<input class="search-text" type="text" />
+						<button class ="search-btn" type="submit" value="true"
+							style="font-size: 16px" >搜索</button>
+
 					</form>
 				</div>
 			</div>
