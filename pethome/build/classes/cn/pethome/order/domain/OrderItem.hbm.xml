@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="cn.pethome.order.domain.OrderItem" table="orderitem">
+		<id name="oitemid" column="oitemid">
+			<generator class="native" />
+		</id>
+		<property name="count" column="count" />
+		<property name="subtotal" column="subtotal" />
+		
+		<!-- 订单项与商品的关系 ，一个商品可对应多个订单项 -->
+		<many-to-one name="goods" class="cn.pethome.goods.domain.Goods"
+			lazy="false" column="gid" />
+			
+		<!-- 订单项与订单的关系 ，多个订单项对应一个订单 -->
+		<many-to-one name="order" class="cn.pethome.order.domain.Order"
+			column="oid" />
+	</class>
+</hibernate-mapping>

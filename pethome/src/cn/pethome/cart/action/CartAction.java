@@ -45,6 +45,11 @@ public class CartAction extends ActionSupport {
 		this.goodsService = goodsService;
 	}
 
+	/**
+	 * 从首页点击购物车进入购物车界面
+	 * 
+	 * @return
+	 */
 	public String mycart() {
 		return "mycart";
 

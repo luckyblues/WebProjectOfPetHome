@@ -34,7 +34,7 @@
 							<div class="submenu">
 								<div class="leftmenu">
 									<dl>
-										<s:iterator value="#c.categorySeconds" var="cs">
+										<s:iterator value="#c.categorySecond" var="cs">
 											<dt>
 												<img
 													src="${pageContext.request.contextPath }/images/categoryImage/<s:property value="#cs.scimg"/>"
@@ -92,7 +92,88 @@
 		</div>
 	</div>
 
-	<%@include file="pagemain.jsp"%>
+	<!--热卖商品展示-->
+
+
+	<div class="page-main">
+		<ul class="goods-box">
+			<!-- ========开始头部显示以及分类，以及二级分类 -->
+			<div class="box-head">
+				<h2>热卖商品</h2>
+			</div>
+			<!-- 开始商品box-body的循环，是真正的十条商品记录 -->
+			<li class="box-body">
+				<ul class="goods-list">
+					<!-- ============开始商品的循环 -->
+					<s:iterator value="hlist" var="h">
+						<!-- =========开始一条商品 -->
+						<li><a
+							href="${pageContext.request.contextPath }/goods_findDetailGoods.action?gid=<s:property value="#h.gid"/>"><img
+								src="${pageContext.request.contextPath }/images/goodsImage/<s:property value="#h.gimage"/>"
+								alt="" width="150px" height="150px" /></a>
+
+							<h2>
+								<s:property value="#h.gname" />
+							</h2>
+							<h3>
+								￥
+								<s:property value="#h.gprice" />
+								元
+							</h3>
+							<div class="hidden">
+								<h4>
+									<s:property value="#h.gdesc" />
+								</h4>
+							</div></li>
+						<!-- =======结束一条商品 -->
+					</s:iterator>
+					<!-- ============结束商品的循环 -->
+				</ul>
+			</li>
+		</ul>
+	</div>
+
+
+	<!-- 最新商品展示 -->
+
+
+	<div class="page-main">
+		<ul class="goods-box">
+			<!-- ========开始头部显示以及分类，以及二级分类 -->
+			<div class="box-head">
+				<h2>最新商品</h2>
+			</div>
+			<!-- 开始商品box-body的循环，是真正的十条商品记录 -->
+			<li class="box-body">
+				<ul class="goods-list">
+					<!-- ============开始商品的循环 -->
+					<s:iterator value="nlist" var="n">
+						<!-- =========开始一条商品 -->
+						<li><a
+							href="${pageContext.request.contextPath }/goods_findDetailGoods.action?gid=<s:property value="#n.gid"/>"><img
+								src="${pageContext.request.contextPath }/images/goodsImage/<s:property value="#n.gimage"/>"
+								alt="" width="150px" height="150px" /></a>
+
+							<h2>
+								<s:property value="#n.gname" />
+							</h2>
+							<h3>
+								￥
+								<s:property value="#n.gprice" />
+								元
+							</h3>
+							<div class="hidden">
+								<h4>
+									<s:property value="#n.gdesc" />
+								</h4>
+							</div></li>
+						<!-- =======结束一条商品 -->
+					</s:iterator>
+					<!-- ============结束商品的循环 -->
+				</ul>
+			</li>
+		</ul>
+	</div>
 
 	<a href="javascript:;" class="top">返回<br />顶部
 	</a>

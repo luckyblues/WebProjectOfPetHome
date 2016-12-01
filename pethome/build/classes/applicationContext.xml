@@ -62,10 +62,15 @@
 		<!-- 配置Hibernate的映射文件 -->
 		<property name="mappingResources">
 			<list>
+				<value>cn/pethome/user/domain/User.hbm.xml</value>
 				<value>cn/pethome/category/domain/Category.hbm.xml</value>
 				<value>cn/pethome/goods/domain/Goods.hbm.xml</value>
 				<value>cn/pethome/categorysecond/domain/CategorySecond.hbm.xml
 				</value>
+				<value>cn/pethome/order/domain/Order.hbm.xml</value>
+				<value>cn/pethome/order/domain/OrderItem.hbm.xml</value>
+				<value>cn/pethome/advice/domain/Advice.hbm.xml</value>
+				<value>cn/pethome/admin/domain/Admin.hbm.xml</value>
 			</list>
 		</property>
 
@@ -91,8 +96,14 @@
 	<bean id="indexAction" class="cn.pethome.index.action.IndexAction"
 		scope="prototype">
 		<property name="categoryService" ref="categoryService" />
+		<property name="goodsService" ref="goodsService" />
 	</bean>
 
+	<!-- UserAction的配置 -->
+	<bean id="userAction" class="cn.pethome.user.action.UserAction"
+		scope="prototype">
+		<property name="userService" ref="userService" />
+	</bean>
 
 	<!-- 商品Action的配置 -->
 	<bean id="goodsAction" class="cn.pethome.goods.action.GoodsAction"
@@ -106,9 +117,67 @@
 		<property name="goodsService" ref="goodsService" />
 	</bean>
 
+	<!-- 订单Action的配置 -->
+	<bean id="orderAction" class="cn.pethome.order.action.OrderAction"
+		scope="prototype">
+		<property name="orderService" ref="orderService" />
+	</bean>
+
+	<!-- 建议Action的配置 -->
+	<bean id="adviceAction" class="cn.pethome.advice.action.AdviceAction"
+		scope="prototype">
+		<property name="adviceService" ref="adviceService" />
+	</bean>
+
+	<!-- 管理员AdminAction配置 -->
+	<bean id="adminAction" class="cn.pethome.admin.action.AdminAction"
+		scope="prototype">
+		<!-- 注入AdminService -->
+		<property name="adminService" ref="adminService" />
+	</bean>
+	<!-- 后台一级分类adminCategoryAction配置 -->
+	<bean id="adminCategoryAction" class="cn.pethome.category.adminaction.AdminCategoryAction"
+		scope="prototype">
+		<!-- 注入Service -->
+		<property name="categoryService" ref="categoryService" />
+	</bean>
+	<!-- 后台商品adminGoodsAction配置 -->
+	<bean id="adminGoodsAction" class="cn.pethome.goods.adminGoodsaction.AdminGoodsAction"
+		scope="prototype">
+		<!-- 注入Service -->
+		<property name="goodsService" ref="goodsService" />
+		<!-- 注入二级分类Service -->
+		<property name="categorySecondService" ref="categorySecondService" />
+	</bean>
+
+	<!-- 后台管理用户adminUserAction配置 -->
+	<bean id="adminUserAction" class="cn.pethome.user.adminaction.AdminUserAction"
+		scope="prototype">
+		<!-- 注入userService -->
+		<property name="userService" ref="userService" />
+	</bean>
+	<!--后台 二级分类配置 -->
+	<bean id="adminCSAction" class="cn.pethome.categorysecond.adminCSAction.AdminCSAction"
+		scope="prototype">
+		<!-- 注入二级分类Service -->
+		<property name="categorySecondService" ref="categorySecondService" />
+		<!-- 注入一级分类的Service -->
+		<property name="categoryService" ref="categoryService" />
+	</bean>
+
+	<!-- 后台建议管理 -->
+	<bean id="adminAdviceAction" class="cn.pethome.advice.adminAdviceaction.AdminAdviceAction"
+		scope="prototype">
+		<!-- 注入AdviceService -->
+		<property name="adviceService" ref="adviceService" />
+
+	</bean>
 	<!-- ======================Service的配置 -->
 
-
+	<!-- UserService层注入UserDao -->
+	<bean id="userService" class="cn.pethome.user.service.UserService">
+		<property name="userDao" ref="userDao" />
+	</bean>
 	<!-- 一级分类的Service层注入 -->
 	<bean id="categoryService" class="cn.pethome.category.service.CategoryService">
 		<!-- 在Categoryservice中注入CategoryDao -->
@@ -120,22 +189,67 @@
 		<!-- 在 goodsService中注入GoodsDao -->
 		<property name="goodsDao" ref="goodsDao" />
 	</bean>
+	<!-- OrderService的配置 -->
+	<bean id="orderService" class="cn.pethome.order.service.OrderService">
+		<!-- 在orderService中注入OrderDao -->
+		<property name="orderDao" ref="orderDao" />
+	</bean>
+	<!-- 建议的Service配置 -->
+	<bean id="adviceService" class="cn.pethome.advice.service.AdviceService">
+		<property name="adviceDao" ref="adviceDao" />
+	</bean>
 
-
+	<!-- 管理员AdminService层 -->
+	<bean id="adminService" class="cn.pethome.admin.service.AdminService">
+		<!-- 注入AdminDao -->
+		<property name="adminDao" ref="adminDao" />
+	</bean>
+	<!-- 后台二级分类AdminService层 -->
+	<bean id="categorySecondService" class="cn.pethome.categorysecond.service.CategorySecondService">
+		<!-- 注入dao层 -->
+		<property name="categorySecondDao" ref="categorySecondDao" />
+	</bean>
 
 
 	<!-- ==================Dao的配置 -->
 
+	<!-- 用户的Dao层注入sessionFactory -->
+	<bean id="userDao" class="cn.pethome.user.dao.UserDao">
+		<!-- 注入sessionFactory -->
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
 	<!-- 一级分类的Dao层注入 -->
 	<bean id="categoryDao" class="cn.pethome.category.dao.CategoryDao">
 		<!-- 注入sessionFactory -->
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+
 	<!-- GoodsDao层注入 -->
 	<bean id="goodsDao" class="cn.pethome.goods.dao.GoodsDao">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
+	<!-- OrderDao注入sessionFactory -->
+	<bean id="orderDao" class="cn.pethome.order.dao.OrderDao">
+		<!-- 注入sessionFactory -->
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
+	<!-- advicedao层的配置 -->
+	<bean id="adviceDao" class="cn.pethome.advice.dao.AdviceDao">
+		<!-- 注入sessionFactory -->
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- AdminDao层配置 -->
+	<bean id="adminDao" class="cn.pethome.admin.dao.AdminDao">
+		<!-- 注入sessionFactory -->
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- 二级分类dao的配置 -->
+	<bean id="categorySecondDao" class="cn.pethome.categorysecond.dao.CategorySecondDao">
+		<!--注入sessionFactory -->
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 </beans>

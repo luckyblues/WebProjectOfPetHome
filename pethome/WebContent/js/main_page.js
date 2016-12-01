@@ -13,8 +13,6 @@ $(function() {
 	}, function() {
 		// showTime();
 	});
-	prevClick();
-	nextClick();
 	// 返回顶部的
 	$(window).scroll(function() {
 		var distance = $(this).scrollTop();
@@ -33,32 +31,6 @@ $(function() {
 
 	});
 });
-
-function prevClick() {
-	/* 点击上一页，先清除定时滚动，进行判断，如果是第一张的话就让i=6，调到最后一张 */
-	$("#prev").click(function() {
-		clearInterval(timer);
-		if (i == 0) {
-			i = 6;
-		}
-		i--;
-		show();// 进行图片切换
-		// showTime();
-	});
-}
-function nextClick() {
-	/* 点击下一页，先清除定时滚动，进行判断，如果是第一张的话就让i=6，调到最后一张 */
-	$("#next").click(function() {
-		clearInterval(timer);
-		if (i == 6) {
-			i = -1;
-		}
-		i++;
-		show();
-
-		// showTime();
-	});
-}
 
 function showTime() {
 	timer = setInterval(function() {

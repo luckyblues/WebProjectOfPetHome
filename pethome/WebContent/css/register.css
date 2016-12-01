@@ -1,0 +1,154 @@
+@CHARSET "UTF-8";
+
+#divMain {
+	margin-left: 240px;
+	font-family: "微软雅黑";
+	width: 880px;
+	height: 330px;
+}
+
+#divTittle {
+	height: 130px;
+	font-family: "微软雅黑";
+}
+
+#imgLogo {
+	margin: 30px;
+	vertical-align: middle;
+}
+
+#spanLogo {
+	width: 100px;
+	height: 100px;
+	margin-left: 100px;
+	vertical-align: middle;
+}
+
+#spanTittle1 {
+	font-size: 18px;
+	text-align: center;
+}
+
+#spanTittle2 {
+	margin-left: 670px;
+	font-size: 16px;
+	text-align: center;
+}
+
+#spanTittle3 {
+	margin-top: 50px;
+	font-size: 18px;
+	text-align: center;
+}
+
+#divFoot {
+	height: 100px;
+	border-top: 1px solid #CCC;
+	font-size: 12px;
+	color: #666;
+	text-align: center;
+	font-family: "微软雅黑";
+}
+
+.tdText {
+	width: 150px;
+	height: 30px;
+	text-align: right;
+}
+
+.tdInput {
+	width: 350px;
+}
+
+.tdError {
+	width: 150px;
+}
+
+.classError {
+	width: 200px;
+	height: 30px;
+}
+
+#tableForm {
+	line-height: 50px;
+}
+
+.inputClass {
+	width: 350px;
+	height: 35px;
+	outline: none; border : 1px solid #999;
+	line-height: 35px;
+	padding-left: 8px;
+	border-radius: 2px; /* css 3标准 */
+	-moz-border-radius: 2px;
+	border: 1px solid #999; line-height : 35px; padding-left : 8px;
+	border-radius : 2px; /* css 3标准 */ -moz-border-radius : 2px;
+	/* mozilla */
+	-webkit-border-radius: 2px; /* webkit */
+}
+
+.errorClass {
+	height: 35px;
+	line-height: 35px;
+	color: #f40000;
+	font-size: 10px;
+	border: 1px solid #ffb8b6;
+	background-color: #fef2f2;
+	padding: 10px 10px 10px 10px;
+	border-radius: 5px; /* css 3标准 */
+	-moz-border-radius: 5px; /* mozilla */
+	-webkit-border-radius: 5px; /* webkit */
+}
+
+.error {
+	height: 35px;
+	line-height: 35px;
+	color: #f40000;
+	font-size: 10px;
+	border: 1px solid #ffb8b6;
+	background-color: #fef2f2;
+	padding: 10px 10px 10px 10px;
+	border-radius: 5px; /* css 3标准 */
+	-moz-border-radius: 5px; /* mozilla */
+	-webkit-border-radius: 5px; /* webkit */
+}
+
+#divA {
+	margin-top: 40px;
+}
+
+.pClass {
+	text-align: center;
+}
+
+a:link, a:visited {
+	text-decoration: none;
+	color: #666;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #69F;
+}
+
+.submit {
+	display: block;
+	width: 360px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 15px;
+	background-color: #f03;
+	text-align: center;
+	cursor: pointer;
+	margin-top: 10px;
+	border: 1px solid #f03;
+	border-radius: 2px; /* css 3标准 */
+	-moz-border-radius: 2px; /* mozilla */
+	-webkit-border-radius: 2px;
+	border-radius: 2px; /* webkit */
+	color: #fff;
+}
+
+.submit:hover {
+	background-color: #f33;
+}

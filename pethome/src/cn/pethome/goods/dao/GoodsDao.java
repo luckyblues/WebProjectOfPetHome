@@ -2,18 +2,12 @@ package cn.pethome.goods.dao;
 
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.type.Type;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import com.opensymphony.xwork2.ModelDriven;
-
 import cn.pethome.goods.domain.Goods;
-import cn.pethome.util.PageBean;
 import cn.pethome.util.PageCallBackImpl;
 
 /**
@@ -23,12 +17,7 @@ import cn.pethome.util.PageCallBackImpl;
  *
  */
 
-public class GoodsDao extends HibernateDaoSupport implements ModelDriven<Goods> {
-
-	@Override
-	public Goods getModel() {
-		return null;
-	}
+public class GoodsDao extends HibernateDaoSupport {
 
 	/**
 	 * 根据商品主键查找具体商品的实现
@@ -47,7 +36,7 @@ public class GoodsDao extends HibernateDaoSupport implements ModelDriven<Goods> 
 	 * 
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
+
 	public int findGoodsCount(Integer scid) {
 
 		// hql语句，查询某二级分类下的所有商品记录数
@@ -72,7 +61,6 @@ public class GoodsDao extends HibernateDaoSupport implements ModelDriven<Goods> 
 	 * @return
 	 */
 
-	@SuppressWarnings("unchecked")
 	public List<Goods> findGoodsByScid(Integer scid, int startIndex, int pageSize) {
 		// 外联元素从商品类中根据二级分类的主键查询商品集合
 		String hql = "select g from Goods g join g.categorySecond  cs where cs.scid=?";
@@ -119,30 +107,107 @@ public class GoodsDao extends HibernateDaoSupport implements ModelDriven<Goods> 
 		return glist;
 	}
 
-	/*
-	 * 查询商品热卖的记录
+	/**
+	 * 首页上显示20条热卖商品
 	 * 
+	 * @param cid
+	 * @return
 	 */
-	public int findHotGoodsCount(Integer scid) {
-		String hql = "select count(*) from Goods g where g.categorySecond.scid=? and g.is_hot=1";
-		List<Long> hotlist = this.getHibernateTemplate().find(hql, scid);
-		if (hotlist != null) {
-			return hotlist.get(0).intValue();
+	public List<Goods> findHotGoods() {
+		// 先获取商品类
+		DetachedCriteria criteria = DetachedCriteria.forClass(Goods.class);
+		// 添加查询条件是表中的is_hot=1的那些商品
+		criteria.add(Restrictions.eq("is_hot", 1));
+		// 每页设置多少商品数
+		List<Goods> hlist = this.getHibernateTemplate().findByCriteria(criteria, 0, 20);
+		return hlist;
+	}
+
+	/**
+	 * 查询最新上架商品
+	 * 
+	 * @return
+	 */
+	public List<Goods> findNewGoods() {
+		// 使用离线查询,先查询出商品类
+		DetachedCriteria criteria = DetachedCriteria.forClass(Goods.class);
+		// 添加附加条件，根据日期
+		criteria.addOrder(Order.desc("gdate"));
+		// 调用getHibernateTemplate的findByCriteria方法返回商品集合,并且每页显示20条商品数
+		List<Goods> nlist = this.getHibernateTemplate().findByCriteria(criteria, 0, 20);
+		return nlist;
+	}
+
+	/**
+	 * ==========后台查询所有商品记录数
+	 * 
+	 * @return
+	 */
+	public int findCountAdminGoods() {
+		// 查询商品的数量的语句
+		String hql = "select count(*) from Goods";
+		// 执行查询语句
+		List<Long> list = this.getHibernateTemplate().find(hql);
+		// 如果取出数据的话，则list中的下标值为0的数据即为要取的
+		if (list != null) {
+			// 将Long型转换为int类型
+			return list.get(0).intValue();
 		}
 		return 0;
 	}
 
 	/**
-	 * 根据商品的一级分类的主键查询热卖商品===================还没实现
+	 * =============后台，查询所有商品，并分页的方法
 	 * 
-	 * @param cid
+	 * @param startIndex
+	 * @param pageSize
 	 * @return
 	 */
-	public List<Goods> findHotGoodsByScid(Integer scid, int startIndex, int pageSize) {
-		String hql = "select g from Goods g join g.categorySecond cs where cs.scid=? and g.is_hot=1";
-		List<Goods> hlist = this.getHibernateTemplate()
-				.execute(new PageCallBackImpl<>(hql, new Object[] { scid }, startIndex, pageSize));
-		return hlist;
+	public List<Goods> findAllAdminGoods(int startIndex, int pageSize) {
+		String hql = "from Goods";
+		// 调用execute方法，并实现类分页类
+		List<Goods> list = this.getHibernateTemplate().execute(new PageCallBackImpl<>(hql, null, startIndex, pageSize));
+		// 将查询出来的数据返回
+		return list;
+	}
+
+	/**
+	 * 后台保存商品
+	 * 
+	 * @param goods
+	 */
+	public void save(Goods goods) {
+		this.getHibernateTemplate().save(goods);
+	}
+
+	/**
+	 * 根据名字查询
+	 * 
+	 * @param searchName
+	 * @return
+	 */
+	public int findCountByName(String searchName) {
+		String hql = "select count(*) from Goods g where g.gname like '%+searchName+%'";
+		List<Long> list = this.getHibernateTemplate().find(hql, searchName);
+		if (list != null) {
+			return list.get(0).intValue();
+		}
+		return 0;
+	}
+
+	/**
+	 * 模糊查询
+	 * 
+	 * @param searchName
+	 * @param startIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public List<Goods> findGoodsByName(String searchName, int startIndex, int pageSize) {
+		String hql = "from Goods g where g.gname like '%" + searchName + "%'";
+		List<Goods> list = this.getHibernateTemplate()
+				.execute(new PageCallBackImpl<>(hql, new Object[] { searchName }, startIndex, pageSize));
+		return list;
 	}
 
 }

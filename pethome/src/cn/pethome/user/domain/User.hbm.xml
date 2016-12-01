@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="cn.pethome.user.domain.User" table="user">
+		<id name="uid" column="uid" type="java.lang.Integer">
+			<generator class="identity" />
+		</id>
+		<property name="uname" column="uname" />
+		<property name="upwd" column="upwd" />
+		<property name="email" column="email" />
+		<property name="address" column="address" />
+		<property name="tele" column="tele" />
+		<set name="orders" cascade="delete">
+			<key column="uid" />
+			<one-to-many class="cn.pethome.order.domain.Order" />
+		</set>
+	</class>
+</hibernate-mapping>

@@ -27,6 +27,16 @@ public class GoodsAction extends ActionSupport implements ModelDriven<Goods> {
 	private Integer cid;
 	// 接受index.jsp传递过来的参数currentPage
 	private Integer currentPage;
+	// 模糊查询的关键字
+	private String searchName;
+
+	public String getSearchName() {
+		return searchName;
+	}
+
+	public void setSearchName(String searchName) {
+		this.searchName = searchName;
+	}
 
 	public Integer getCid() {
 		return cid;
@@ -64,6 +74,11 @@ public class GoodsAction extends ActionSupport implements ModelDriven<Goods> {
 		this.goodsService = goodsService;
 	}
 
+	/**
+	 * 根据商品id查询商品详请
+	 * 
+	 * @return
+	 */
 	public String findDetailGoods() {
 		/*
 		 * 因为实现模型驱动的原因，所以这里可以直接获取商品主键，并且这里不需要在重新创建商品对象，因为模型驱动的对象是位于栈顶的，
@@ -82,7 +97,7 @@ public class GoodsAction extends ActionSupport implements ModelDriven<Goods> {
 	public String findGoodsByScid() {
 		// 调用goodsService中的方法查询商品集合并带有分页，返回的对象是pageBean
 		PageBean pageBean = goodsService.findGoodsByScid(scid, currentPage);
-		// 将结果存到值栈中去,set保存对象,以键值对的形式存储
+		// 将结果存到值栈中去,set保存pageBean对象,以键值对的形式存储
 		ActionContext.getContext().getValueStack().set("pageBean", pageBean);
 		return "findGoodsByScid";
 	}
@@ -101,13 +116,15 @@ public class GoodsAction extends ActionSupport implements ModelDriven<Goods> {
 
 	}
 
-	public String findHotGoods() {
-		/**
-		 * 查询首页二级分类下的十条的热门商品
-		 */
-		PageBean pageBean = goodsService.findHotGoodsByscid(scid, currentPage);
-		// 将商品信息存入值栈中中，集合一般存在set中，对象一般存在push中
+	/**
+	 * 模糊查询并分页
+	 */
+	public String findGoodsByName() {
+		// 调用Service中的方法
+		PageBean pageBean = goodsService.findAllGoodsByName(searchName, currentPage);
+		// 将结果存入值栈中
 		ActionContext.getContext().getValueStack().set("pageBean", pageBean);
-		return "findHotGoods";
+		return "findGoodsByName";
 	}
+
 }

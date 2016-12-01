@@ -27,6 +27,12 @@ public class IndexAction extends ActionSupport {
 		this.categoryService = categoryService;
 	}
 
+	private GoodsService goodsService;
+
+	public void setGoodsService(GoodsService goodsService) {
+		this.goodsService = goodsService;
+	}
+
 	/**
 	 * 执行访问首页的方法
 	 * 
@@ -40,6 +46,21 @@ public class IndexAction extends ActionSupport {
 
 		ActionContext.getContext().getSession().put("clist", clist);
 
+		/**
+		 * 查询热门商品
+		 */
+		List<Goods> hlist = goodsService.findHotGoods();
+		// 将商品信息存入值栈中中，集合一般存在set中，对象一般存在push中
+		ActionContext.getContext().getValueStack().set("hlist", hlist);
+
+		/**
+		 * 查询最新商品记录
+		 */
+		List<Goods> nlist = goodsService.findNewGoods();
+		// 将返回的nlist数据保存在值栈中
+		ActionContext.getContext().getValueStack().set("nlist", nlist);
+
 		return "index";
 	}
+
 }

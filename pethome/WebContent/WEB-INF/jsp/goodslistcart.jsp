@@ -30,86 +30,95 @@
 
 <body>
 	<%@include file="head.jsp"%>
-	<s:if test="#session.cart.cartItems.size()!=0">
-		<!--购物车商品列表盒子-->
-		<div class="Jcart-Box">
-			<!--购物车中商品列表-->
-			<div class="cart-goods-list">
-				<!--列表头部-->
-				<div class="list-head">
-					<div class="col col-img">&nbsp;</div>
-					<div class="col col-name">商品名称</div>
-					<div class="col col-price">商品单价</div>
-					<div class="col col-num">数量</div>
-					<div class="col col-total">小计</div>
-					<div class="col col-action">操作</div>
-				</div>
-				<!--列表body-->
+	<s:if test="#session.existUser.uname!=null">
+		<s:if test="#session.cart.cartItems.size()!=0">
+			<!--购物车商品列表盒子-->
+			<div class="Jcart-Box">
+				<!--购物车中商品列表-->
+				<div class="cart-goods-list">
+					<!--列表头部-->
+					<div class="list-head">
+						<div class="col col-img">&nbsp;</div>
+						<div class="col col-name">商品名称</div>
+						<div class="col col-price">商品单价</div>
+						<div class="col col-num">数量</div>
+						<div class="col col-total">小计</div>
+						<div class="col col-action">操作</div>
+					</div>
+					<!--列表body-->
 
-				<div class="list-body" id="JCartListBody">
-					<!--放一条商品记录de盒子-->
-					<s:iterator value="#session.cart.cartItems" var="cartsession">
-						<div class="item-box">
-							<div class="item-table J-CartGoods">
-								<div class="item-row">
-									<div class="col col-img">
-										<a href="javascript:;"><img
-											src="${pageContext.request.contextPath}/images/goodsImage/<s:property value="#cartsession.goods.gimage"/>"
-											width="
+					<div class="list-body" id="JCartListBody">
+						<!--放一条商品记录de盒子-->
+						<s:iterator value="#session.cart.cartItems" var="cartsession">
+							<div class="item-box">
+								<div class="item-table J-CartGoods">
+									<div class="item-row">
+										<div class="col col-img">
+											<a href="javascript:;"><img
+												src="${pageContext.request.contextPath}/images/goodsImage/<s:property value="#cartsession.goods.gimage"/>"
+												width="
 										80px" height="80px" /></a>
-									</div>
-									<div class="col col-name">
-										<h3 class="name">
-											<a href="javascript:;"> <s:property
-													value="#cartsession.goods.gname" />
-											</a>
-										</h3>
-									</div>
-									<div class="col col-price">
-										<s:property value="#cartsession.goods.gprice" />
-										元
-									</div>
-									<div class="col col-num">
-										<s:property value="#cartsession.num" />
-									</div>
-									<div class="col col-total">
-										<s:property value="#cartsession.subtotal" />
-										元
-									</div>
-									<div class="col col-action">
-										<a
-											href="${pageContext.request.contextPath }/cart_deleteOneCartItem.action?gid=<s:property value="#cartsession.goods.gid"/>"
-											onclick="delOne()">删除</a>
+										</div>
+										<div class="col col-name">
+											<h3 class="name">
+												<a href="javascript:;"> <s:property
+														value="#cartsession.goods.gname" />
+												</a>
+											</h3>
+										</div>
+										<div class="col col-price">
+											<s:property value="#cartsession.goods.gprice" />
+											元
+										</div>
+										<div class="col col-num">
+											<s:property value="#cartsession.num" />
+										</div>
+										<div class="col col-total">
+											<s:property value="#cartsession.subtotal" />
+											元
+										</div>
+										<div class="col col-action">
+											<a
+												href="${pageContext.request.contextPath }/cart_deleteOneCartItem.action?gid=<s:property value="#cartsession.goods.gid"/>"
+												onclick="delOne()">删除</a>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 
-					</s:iterator>
+						</s:iterator>
+					</div>
+
+				</div>
+
+				<div class="raise-tobuy"></div>
+				<!--结算部分-->
+				<div class="cart-bar">
+					<a class="select-left" href="index.action">继续购物</a> <a
+						class="select-left"
+						href="${pageContext.request.contextPath }/cart_deleteAll.action"
+						onclick="deleteAll()">清空购物车</a> <span class="total-price">合计：<span><s:property
+								value="#session.cart.totalamount" />元</span></span>
+					<div class="to-pay">
+						<a href="${pageContext.request.contextPath }/order_myorder.action">去结算</a>
+					</div>
 				</div>
 
 			</div>
-
-			<div class="raise-tobuy"></div>
-			<!--结算部分-->
-			<div class="cart-bar">
-				<a class="select-left" href="index.action">继续购物</a> <a
-					class="select-left"
-					href="${pageContext.request.contextPath }/cart_deleteAll.action"
-					onclick="deleteAll()">清空购物车</a> <span class="total-price">合计：<span><s:property
-							value="#session.cart.totalamount" />元</span></span>
-				<div class="to-pay">
-					<a href="#">去结算</a>
-				</div>
+		</s:if>
+		<s:else>
+			<div class="no-cart">
+				<h2>您的购物车还是空的！</h2>
+				<a href="index.action">去首页看看</a>
 			</div>
-
-		</div>
+		</s:else>
 	</s:if>
 	<s:else>
 		<div class="no-cart">
-			<h2>您的购物车还是空的！</h2>
-			<a href="index.action">去首页看看</a>
+			<h2>您还没登录，快去登录吧！</h2>
+			<a href="${ pageContext.request.contextPath }/user_loginPage.action">登录</a>
 		</div>
+
 	</s:else>
 </body>
 </html>

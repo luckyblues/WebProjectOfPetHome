@@ -13,10 +13,11 @@
 		<property name="scimg" column="scimg" />
 		<property name="scname" column="scname" />
 		<!-- 多个二级分类属于一个一级分类，name值取本类中的相关联的属性名字 class取所关联的类的全路径 -->
-		<many-to-one name="category" class="cn.pethome.category.domain.Category" />
+		<many-to-one name="category" lazy="false"
+			class="cn.pethome.category.domain.Category" column="cid" />
 		<!-- 一对多关系 -->
 		<set name="goodlist" lazy="false" order-by="gid">
-			<key column="categorySecond" />
+			<key column="scid" />
 			<one-to-many class="cn.pethome.goods.domain.Goods" />
 		</set>
 	</class>

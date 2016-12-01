@@ -288,3 +288,203 @@ body {
 .no-cart a:hover {
 	transform: translateY(-1px);
 }
+/*下方的结算部分*/
+.cart-bar {
+	width: 1226px;
+	height: 50px;
+	display: block;
+	box-shadow: 0 0 18px #DDD;
+	-moz-box-shadow: 0 0 18px #DDD;
+	-ms-box-shadow: 0 0 18px #DDD;
+	-o-box-shadow: 0 0 18px #DDD;
+	-webkit-box-shadow: 0 0 18px #DDD;
+}
+
+.cart-bar .select-left {
+	display: block;
+	width: 100px;
+	height: 50px;
+	float: left;
+	/*	background:#0C3;*/
+	line-height: 50px;
+	margin-left: 30px;
+}
+/*继续购物的a标签*/
+.cart-bar a {
+	font-size: 17px;
+	color: #757575;
+	text-decoration: none;
+}
+
+.cart-bar a:hover {
+	font-size: 17px;
+	color: #F03;
+	text-decoration: none;
+}
+
+.cart-bar .total-price {
+	font-size: 17px;
+	color: #424242;
+	/*	background:#0C3;*/
+	line-height: 50px;
+	padding-left: 300px;
+}
+
+.cart-bar .topay {
+	width: 700px;
+	height: 50px;
+	background: #fff;
+	float: left;
+}
+
+.cart-bar .total {
+	width: 300px;
+	float: right;
+	height: 50px;
+}
+
+.total span {
+	width: 100px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	font-size: 20px;
+	color: #f03;
+}
+
+.total-price span {
+	font-size: 20px;
+	margin-left: 20px;
+	color: #f03;
+	font-weight: normal;
+	padding-left: 30px;
+}
+
+.cart-bar .to-pay {
+	float: right;
+	background: #f03;
+}
+
+.to-pay a {
+	display: block;
+	width: 202px;
+	height: 50px;
+	color: #fff;
+	font-size: 17px;
+	text-decoration: none;
+	line-height: 50px;
+	text-align: center;
+}
+
+.to-pay a:hover {
+	color: #fff;
+	box-shadow: 0 0 1px #f03;
+	-moz-box-shadow: 0 0 1px #f03;
+	-ms-box-shadow: 0 0 1px #f03;;
+	-o-box-shadow: 0 0 1px #f03;;
+	-webkit-box-shadow: 0 0 1px #f03;
+}
+
+.col-check input {
+	width: 17px;
+	height: 17px;
+	display: block;
+	background: #fff;
+	margin-left: 10px;
+}
+
+/*填写地址，姓名和手机号*/
+.message {
+	width: 1228px;
+	height: 400px;
+	background: #fff;
+	margin: 20px auto;
+}
+
+.message div {
+	width: 900px;
+	height: 60px;
+	margin-left: 50px;
+	margin-top: 30px;
+}
+
+.message p {
+	font-size: 20px;
+	color: #434343;
+	padding-top: 20px;
+	padding-left: 20px;
+}
+
+.message span {
+	font-size: 18px;
+	color: #f33;
+	margin-left: 200px;
+}
+
+.message input {
+	width: 550px;
+	height: 50px;
+	color: #309;
+}
+
+.bank {
+	width: 1228px;
+	height: 350px;
+	background: #fff;
+	margin: 0 auto;
+}
+
+.bank p {
+	font-size: 20px;
+	color: #434343;
+	padding-top: 20px;
+	padding-left: 30px;
+}
+
+.bank .bank-detail {
+	margin-left: 70px;
+	list-style: none;
+	width: 1228px;
+	height: 300px;
+	margin-top: 30px;
+}
+
+.bank-detail li {
+	width: 230px;
+	height: 80px;
+	float: left;
+	margin-right: 40px;
+	margin-top: 20px;
+	border: 1px solid #DDD;
+}
+
+.bank-detail li input {
+	margin-left: 15px;
+}
+
+.bank-detail li img {
+	width: 190px;
+	height: 70px;
+	vertical-align: middle;
+}
+
+.pay-box {
+	width: 1228px;
+	height: 50px;
+	margin: 20px auto;
+	background: #fff;
+}
+
+.pay-box a {
+	width: 200px;
+	height: 50px;
+	text-decoration: none;
+	line-height: 50px;
+	display: block;
+	color: #fff;
+	background: #f03;
+	font-size: 16px;
+	float: right;
+	text-align: center;
+	display: block;
+}

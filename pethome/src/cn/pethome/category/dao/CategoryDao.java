@@ -27,8 +27,57 @@ public class CategoryDao extends HibernateDaoSupport {
 		return clist;
 
 	}
+
 	/**
-	 * 在CategoryDao继承HibernateDaoSupport,并在Spring的Category持久层中注入sessionFactory
+	 * 后台查询所有一级分类
+	 * 
+	 * @return
 	 */
+	public List<Category> findAllAdminCategory() {
+		String hql = "from Category";
+		// 返回list类型
+		List<Category> lists = this.getHibernateTemplate().find(hql);
+		return lists;
+	}
+
+	/**
+	 * 后台添加一级分类
+	 * 
+	 * @param category
+	 * @return
+	 */
+	public Object save(Category category) {
+		return this.getHibernateTemplate().save(category);
+	}
+
+	/**
+	 * 根据cid查询出该一级分类
+	 * 
+	 * @param cid
+	 * @return
+	 */
+	public Category findByCid(Integer cid) {
+		// 根据get方法传入一级分类的类，和id
+		return this.getHibernateTemplate().get(Category.class, cid);
+	}
+
+	/**
+	 * 删除一级分类
+	 * 
+	 * @param category
+	 */
+	public void delete(Category category) {
+		this.getHibernateTemplate().delete(category);
+	}
+
+	/**
+	 * 后台修改一级分类dao层实现
+	 * 
+	 * @param category
+	 * @return
+	 */
+	public void update(Category category) {
+		this.getHibernateTemplate().update(category);
+	}
 
 }

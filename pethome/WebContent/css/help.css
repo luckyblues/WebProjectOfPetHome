@@ -1,0 +1,133 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+
+body {
+	background: #fff;
+}
+
+.box {
+	width: 1228px;
+	height: auto;
+	margin: 40px auto;
+}
+
+.umenu {
+	width: 250px;
+	height: auto;
+	float: left;
+}
+
+ul {
+	list-style: none;
+}
+
+.umenu a {
+	text-decoration: none;
+	text-align: center;
+}
+
+.uitem a:hover {
+	background: #fff;
+	color: #000;
+}
+
+.litem {
+	width: 227px;
+}
+
+.litem>a {
+	color: #fff;
+	height: 50px;
+	padding-left: 5px;
+	background: #B5CC89;
+	display: block;
+	margin-top: 1px;
+	line-height: 50px;
+}
+
+.uitem li {
+	border-bottom: solid 1px #ddd;
+}
+
+.uitem  a {
+	height: 50px;
+	padding-left: 5px;
+	background: #DFEBBC;
+	display: block;
+	color: #000;
+	line-height: 50px;
+	border-bottom: 1px solid #fff;
+	padding-left: 20px;
+}
+
+.box .help-right {
+	float: right;
+	width: 970px;
+	height: auto;
+	border: 1px solid #ddd;
+}
+
+/*帮助详情*/
+.help-right .title {
+	width: 100%;
+	height: 50px;
+	border-bottom: 1px solid #DFEBBC;
+}
+
+.title span {
+	width: 100px;
+	height: 50px;
+	display: block;
+	background: #DFEBBC;
+	line-height: 50px;
+	font-size: 18px;
+	font-weight: 400;
+	padding-left: 36px;
+}
+
+.detail .titlep {
+	width: 950px;
+	height: 35px;
+	background: #DFEBBC;
+	padding-left: 10px;
+	color: #000;
+	line-height: 35px;
+}
+
+.detail p {
+	width: 950px;
+	color: #434343;
+	padding-left: 15px;
+	height: 70px;
+	margin-top: 5px;
+	text-align: left;
+}
+.detail h2{
+	width: 950px;
+	height: 40px;
+	margin-top: 5px;
+	padding-left: 10px;
+	color: #f03;
+}
+.detail14 p {
+	width: 950px;
+	height: 40px;
+	color: #434343;
+	padding-left: 15px;
+	margin-top: 5px;
+	text-align: left;
+}
+
+.detail15 p {
+	width: 950px;
+	height: 50px;
+	color: #434343;
+	padding-left: 30px;
+	margin-top: 5px;
+	text-align: left;
+}

@@ -16,12 +16,22 @@
 		</action>
 
 
+		<!-- 配置用户模块的Action -->
+		<action name="user_*" class="userAction" method="{1}">
+			<result name="registPage">/WEB-INF/jsp/register.jsp</result>
+			<result name="input">/WEB-INF/jsp/register.jsp</result>
+			<result name="loginPage">/WEB-INF/jsp/login.jsp</result>
+			<result name="login">/WEB-INF/jsp/login.jsp</result>
+			<result name="loginSuccess" type="redirectAction">index</result>
+			<result name="exit" type="redirectAction">index</result>
+		</action>
 
 		<action name="goods_*" class="goodsAction" method="{1}">
 			<result name="findDetailGoods">/WEB-INF/jsp/detailGoods.jsp</result>
 			<result name="findGoodsByScid">/WEB-INF/jsp/goodsInFrontByScid.jsp</result>
 			<result name="findGoodsByCid">/WEB-INF/jsp/goodsInFrontByCid.jsp</result>
-			<result name="findHotGoods">/WEB-INF/jsp/index.jsp</result>
+			<result name="findGoodsByName">/WEB-INF/jsp/goodsByName.jsp</result>
+
 		</action>
 
 
@@ -30,6 +40,71 @@
 			<result name="addtoCart">/WEB-INF/jsp/goodslistcart.jsp</result>
 			<result name="deleteOneCartItem">/WEB-INF/jsp/goodslistcart.jsp</result>
 			<result name="deleteAll">/WEB-INF/jsp/goodslistcart.jsp</result>
+		</action>
+
+		<!-- 订单的action配置 -->
+		<action name="order_*" class="orderAction" method="{1}">
+			<result name="myorder">/WEB-INF/jsp/pay.jsp</result>
+			<result name="myaccount">/WEB-INF/jsp/myaccount.jsp</result>
+		</action>
+
+
+		<!-- 建议的action配置 -->
+		<action name="advice_*" class="adviceAction" method="{1}">
+			<result name="inputadvice">/WEB-INF/jsp/advice.jsp</result>
+			<result name="saveAdvice" type="redirectAction">advice_inputadvice
+			</result>
+			<result name="help">/help/help10.jsp</result>
+			<result name="knowledge">/knowledge/knowledge.jsp</result>
+		</action>
+
+		<!-- H后台建议管理的配置 -->
+		<action name="adminAdvice_*" class="adminAdviceAction" method="{1}">
+			<result name="findAdvice">/admin/adviceManage.jsp</result>
+			<result name="detailAdvice">/admin/detailAdvice.jsp</result>
+		</action>
+		<!-- 管理员action配置 -->
+		<action name="admin_*" class="adminAction" method="{1}">
+			<result name="loginFail">/admin/login.jsp</result>
+			<result name="loginSuccess">/admin/index.jsp</result>
+			<result name="exit" type="redirectAction">admin_login</result>
+		</action>
+
+		<!-- 后台一级分类的action配置 -->
+		<action name="adminCategory_*" class="adminCategoryAction"
+			method="{1}">
+			<result name="findAllAdminCategory">/admin/categorylist.jsp</result>
+			<result name="delCategory" type="redirectAction">adminCategory_findAllAdminCategory
+			</result>
+			<result name="findByCid">/admin/updateCategory.jsp</result>
+			<result name="updateCategory" type="redirectAction">adminCategory_findAllAdminCategory
+			</result>
+		</action>
+
+		<!-- 后台二级分类的action配置 -->
+		<action name="adminCS_*" class="adminCSAction" method="{1}">
+			<result name="findAllCategorySecond">/admin/categorySecondlist.jsp</result>
+			<result name="addPage">/admin/addcategorySecond.jsp</result>
+			<result name="delCategorySecond" type="redirectAction">adminCS_findAllCategorySecond.action?currentPage=1
+			</result>
+			<result name="addCategorySecond" type="redirectAction">adminCS_findAllCategorySecond.action?currentPage=1
+			</result>
+			<result name="edit">/admin/updatecategorySecond.jsp</result>
+			<result name="updateCategorySecond" type="redirectAction">adminCS_findAllCategorySecond.action?currentPage=1
+			</result>
+		</action>
+
+		<!-- 后台用户action配置 -->
+		<action name="adminUser_*" class="adminUserAction" method="{1}">
+			<result name="findAllUser">/admin/userlist.jsp</result>
+		</action>
+
+		<!-- 后台商品Action配置 -->
+		<action name="adminGoods_*" class="adminGoodsAction" method="{1}">
+			<result name="findAllAdminGoods">/admin/goodslist.jsp</result>
+			<result name="addPage">/admin/addGoods.jsp</result>
+			<result name="addGoods" type="redirectAction">adminGoods_findAllAdminGoods.action?currentPage=1
+			</result>
 		</action>
 	</package>
 </struts>

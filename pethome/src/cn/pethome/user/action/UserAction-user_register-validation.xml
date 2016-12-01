@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC
+  		"-//Apache Struts//XWork Validator 1.0.3//EN"
+  		"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+<!-- 校验用户名 -->
+	<field name="uname">
+		<field-validator type="requiredstring">
+		<message>用户名不能为空</message>		
+		</field-validator>
+	</field>
+	
+	<!-- 校验密码 -->
+	<field name="upwd">
+		<field-validator type="requiredstring">
+		<message>密码不能为空</message>
+		</field-validator>
+	</field>
+	
+	<!-- 校验确认密码  非字段校验-->
+	<validator type="fieldexpression">
+		<param name="fieldName">upwd</param>
+		<param name="fieldName">affpwd</param>
+		<param name="expression"><![CDATA[upwd==affpwd]]></param>
+		<message>两次输入密码不一致</message>		
+	</validator>	
+	
+	<!-- 校验邮箱 -->
+	<field name="email">
+		<field-validator type="email">
+		<message>邮箱格式不正确</message>		
+		</field-validator>
+	</field>
+
+</validators>

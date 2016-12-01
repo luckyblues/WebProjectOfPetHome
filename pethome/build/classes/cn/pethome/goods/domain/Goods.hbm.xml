@@ -16,6 +16,6 @@
 		<property name="gdate" column="gdate" />
 		<!-- 商品和二级分类是多对一关系 -->
 		<many-to-one name="categorySecond"
-			class="cn.pethome.categorysecond.domain.CategorySecond" />
+			class="cn.pethome.categorysecond.domain.CategorySecond" column="scid" />
 	</class>
 </hibernate-mapping>

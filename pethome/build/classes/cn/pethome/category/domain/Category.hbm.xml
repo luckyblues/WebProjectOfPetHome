@@ -12,10 +12,10 @@
 		</id>
 		<!-- 一级分类的名字 -->
 		<property name="cname" column="cname" />
-		<!-- set集合的name值为Category类中的要关联的属性   ,,默认是延迟加载，所以要设置lazy=false-->
-		<set name="categorySeconds" lazy="false" order-by="scid">
+		<!-- set集合的name值为Category类中的要关联的属性 ,,默认是延迟加载，所以要设置lazy=false -->
+		<set name="categorySecond" lazy="false" order-by="scid">
 			<!-- 外键 -->
-			<key column="category" />
+			<key column="cid" />
 			<!-- 对应二级分类的类的全路径 -->
 			<one-to-many class="cn.pethome.categorysecond.domain.CategorySecond" />
 		</set>
