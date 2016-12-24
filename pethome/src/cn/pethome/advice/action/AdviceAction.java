@@ -18,7 +18,6 @@ public class AdviceAction extends ActionSupport implements ModelDriven<Advice> {
 
 	private Advice advice = new Advice();
 
-	@Override
 	public Advice getModel() {
 		return advice;
 	}
@@ -73,17 +72,21 @@ public class AdviceAction extends ActionSupport implements ModelDriven<Advice> {
 	public String saveAdvice() {
 		advice.setAdate(new Date());
 		// 从session中获取用户信息
-		User user = (User) ServletActionContext.getRequest().getSession().getAttribute("existUser");
+		User user = (User) ServletActionContext.getRequest().getSession()
+				.getAttribute("existUser");
 		// 判断用户是否为空，如果为空，则提示并跳转到登录页面
+
 		if (user == null) {
-			this.addActionError("还没有登录，请先去登录");
 			return "login";
 		}
 		// 否则设置用户
 		advice.setUser(user);
 		// 调用Service的方法进行保存
-		adviceService.save(advice);
-		return "saveAdvice";
-
+		boolean addSuccess = adviceService.save(advice);
+		if (addSuccess) {
+			return "saveSuccess";
+		} else {
+			return "addFail";
+		}
 	}
 }

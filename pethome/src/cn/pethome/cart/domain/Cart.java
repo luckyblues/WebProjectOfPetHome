@@ -9,7 +9,7 @@ import java.util.Map;
  * 购物车实体类，因为购物车里面存放的是商品条目和总钱数，而且整个过程只有一个购物车存在,是存放在seesion当中的
  * 
  * @author Administrator 实现序列化和反序列化的接口
- *
+ * 
  */
 public class Cart implements Serializable {
 
@@ -22,7 +22,7 @@ public class Cart implements Serializable {
 	 * 
 	 */
 
-	private Map<Integer, CartItem> map = new LinkedHashMap<>();
+	private Map<Integer, CartItem> map = new LinkedHashMap<Integer, CartItem>();
 
 	private double totalamount;// 所有商品条目计算出来的总金额，并提供get方法
 

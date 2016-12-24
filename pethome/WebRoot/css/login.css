@@ -1,0 +1,151 @@
+@CHARSET "UTF-8";
+
+#divTittle {
+	height: 120px;
+	font-family: "微软雅黑";
+}
+
+#divMain {
+	width: 100%;
+	height: 380px;
+	margin: 0 auto;
+	font-family: "微软雅黑";
+	height: 380px;
+}
+
+#divFoot {
+	height: 100px;
+	border-top: 1px solid #CCC;
+	font-size: 12px;
+	color: #666;
+	text-align: center;
+	font-family: "微软雅黑";
+}
+
+#imgLogo {
+	margin: 30px;
+	vertical-align: middle;
+}
+
+#spanLogo {
+	width: 100px;
+	height: 100px;
+	margin-left: 100px;
+	vertical-align: middle;
+}
+
+#spanTittle1 {
+	font-size: 18px;
+	text-align: center;
+}
+
+#spanTittle2 {
+	margin-left: 680px;
+	font-size: 14px;
+	text-align: center;
+}
+
+#divFoot {
+	height: 100px;
+	border-top: 1px solid #CCC;
+	font-size: 12px;
+	color: #666;
+	text-align: center;
+	font-family: "微软雅黑";
+}
+
+#divA {
+	margin-top: 30px;
+}
+
+a:link,a:visited {
+	text-decoration: none;
+	color: #666;
+}
+
+a:hover {
+	text-decoration: none;
+	color: #69F;
+}
+
+#spanLeft {
+	width: 60%;
+	height: 400px;
+	vertical-align: middle;
+	float: left;
+	vertical-align: middle;
+}
+
+#spanRight {
+	width: 40%;
+	float: right;
+}
+
+#tableLogin {
+	line-height: 60px;
+	background-color: #E7F3DD;
+	margin-top: 50px;
+	border-radius: 5px; /* css 3标准 */
+	-moz-border-radius: 5px; /* mozilla */
+	-webkit-border-radius: 5px; /* webkit */
+}
+
+.tdText {
+	width: 130px;
+	height: 40px;
+	text-align: right;
+}
+
+.tdInput {
+	width: 300px;
+}
+
+.inputClass {
+	width: 250px;
+	height: 35px;
+	outline: none;
+	border: 1px solid #999;
+	line-height: 35px;
+	padding-left: 8px;
+	border-radius: 5px; /* css 3标准 */
+	-moz-border-radius: 5px; /* mozilla */
+	-webkit-border-radius: 5px;
+	border: 1px solid #999; /* webkit */
+}
+
+.submit {
+	display: block;
+	width: 260px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 15px;
+	background-color: #f03;
+	margin-top: 15px;
+	text-align: center;
+	cursor: pointer;
+	color: #fff;
+	border: 1px solid #f03;
+	outline: none;
+	border-radius: 2px; /* css 3标准 */
+	-moz-border-radius: 2px; /* mozilla */
+	-webkit-border-radius: 2px;
+}
+
+.submit:hover {
+	background-color: #f33;
+}
+
+.tdText2 {
+	cursor: pointer;
+	text-align: right;
+	font-size: 14px;
+}
+
+.tdText2 a {
+	display: block;
+	margin-right: 40px;
+}
+
+.tdText2 a:hover {
+	color: #f03;
+}

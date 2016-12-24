@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="cn.pethome.address.domain.Address" table="address">
+		<id name="addid" column="addid" type="java.lang.Integer">
+			<generator class="native" />
+		</id>
+		<property name="address" column="address" />
+		<property name="realName" column="realName" />
+		<property name="tele" column="tele" />
+		<property name="is_default" column="is_default" />
+		<!-- 所属用户 -->
+		<many-to-one name="user" class="cn.pethome.user.domain.User"
+			lazy="false" column="uid" not-null="true" />
+	</class>
+</hibernate-mapping>

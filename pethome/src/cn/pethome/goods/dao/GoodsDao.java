@@ -2,6 +2,10 @@ package cn.pethome.goods.dao;
 
 import java.util.List;
 
+import javax.mail.Session;
+import javax.management.Query;
+
+import org.hibernate.Criteria;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -14,7 +18,7 @@ import cn.pethome.util.PageCallBackImpl;
  * 商品的持久层实现 实现模型驱动
  * 
  * @author Administrator
- *
+ * 
  */
 
 public class GoodsDao extends HibernateDaoSupport {
@@ -61,11 +65,13 @@ public class GoodsDao extends HibernateDaoSupport {
 	 * @return
 	 */
 
-	public List<Goods> findGoodsByScid(Integer scid, int startIndex, int pageSize) {
+	public List<Goods> findGoodsByScid(Integer scid, int startIndex,
+			int pageSize) {
 		// 外联元素从商品类中根据二级分类的主键查询商品集合
 		String hql = "select g from Goods g join g.categorySecond  cs where cs.scid=?";
-		List<Goods> glist = (List<Goods>) this.getHibernateTemplate()
-				.execute(new PageCallBackImpl(hql, new Object[] { scid }, startIndex, pageSize));
+		List<Goods> glist = this.getHibernateTemplate().execute(
+				new PageCallBackImpl<Goods>(hql, new Object[] { scid },
+						startIndex, pageSize));
 		return glist;
 	}
 
@@ -101,8 +107,9 @@ public class GoodsDao extends HibernateDaoSupport {
 		// 多表查询
 		String hql = "select g from Goods g join g.categorySecond cs join cs.category c where c.cid=? ";
 		// 调用execute方法，并调用实现了HibernateCallBack接口的类，里面传入四个参数，返回List类型
-		List<Goods> glist = this.getHibernateTemplate()
-				.execute(new PageCallBackImpl<>(hql, new Object[] { cid }, startIndex, pageSize));
+		List<Goods> glist = this.getHibernateTemplate().execute(
+				new PageCallBackImpl<Goods>(hql, new Object[] { cid },
+						startIndex, pageSize));
 		// 将结果返回
 		return glist;
 	}
@@ -119,7 +126,8 @@ public class GoodsDao extends HibernateDaoSupport {
 		// 添加查询条件是表中的is_hot=1的那些商品
 		criteria.add(Restrictions.eq("is_hot", 1));
 		// 每页设置多少商品数
-		List<Goods> hlist = this.getHibernateTemplate().findByCriteria(criteria, 0, 20);
+		List<Goods> hlist = this.getHibernateTemplate().findByCriteria(
+				criteria, 0, 20);
 		return hlist;
 	}
 
@@ -134,7 +142,8 @@ public class GoodsDao extends HibernateDaoSupport {
 		// 添加附加条件，根据日期
 		criteria.addOrder(Order.desc("gdate"));
 		// 调用getHibernateTemplate的findByCriteria方法返回商品集合,并且每页显示20条商品数
-		List<Goods> nlist = this.getHibernateTemplate().findByCriteria(criteria, 0, 20);
+		List<Goods> nlist = this.getHibernateTemplate().findByCriteria(
+				criteria, 0, 20);
 		return nlist;
 	}
 
@@ -166,7 +175,8 @@ public class GoodsDao extends HibernateDaoSupport {
 	public List<Goods> findAllAdminGoods(int startIndex, int pageSize) {
 		String hql = "from Goods";
 		// 调用execute方法，并实现类分页类
-		List<Goods> list = this.getHibernateTemplate().execute(new PageCallBackImpl<>(hql, null, startIndex, pageSize));
+		List<Goods> list = this.getHibernateTemplate().execute(
+				new PageCallBackImpl<Goods>(hql, null, startIndex, pageSize));
 		// 将查询出来的数据返回
 		return list;
 	}
@@ -175,23 +185,50 @@ public class GoodsDao extends HibernateDaoSupport {
 	 * 后台保存商品
 	 * 
 	 * @param goods
+	 * @return
 	 */
-	public void save(Goods goods) {
+	public boolean save(Goods goods) {
 		this.getHibernateTemplate().save(goods);
+		return true;
 	}
 
 	/**
-	 * 根据名字查询
+	 * 后台删除商品的Dao层
+	 * 
+	 * @param goods
+	 * @return
+	 */
+	public boolean delete(Goods goods) {
+		this.getHibernateTemplate().delete(goods);
+		return true;
+	}
+
+	/**
+	 * 后台修改商品的方法
+	 * 
+	 * @param goods
+	 * @return
+	 */
+	public boolean update(Goods goods) {
+		this.getHibernateTemplate().update(goods);
+		return true;
+	}
+
+	/**
+	 * 模糊查询数量
 	 * 
 	 * @param searchName
 	 * @return
 	 */
-	public int findCountByName(String searchName) {
-		String hql = "select count(*) from Goods g where g.gname like '%+searchName+%'";
-		List<Long> list = this.getHibernateTemplate().find(hql, searchName);
+	public int findGoodsByName(String searchName) {
+		String hql = "select count(*) from Goods g where g.gname like '%"
+				+ searchName + "%'";
+		System.out.println(hql);
+		List<Long> list = this.getHibernateTemplate().find(hql);
 		if (list != null) {
-			return list.get(0).intValue();
+			list.get(0).intValue();
 		}
+		System.out.println(list.get(0).intValue());
 		return 0;
 	}
 
@@ -203,10 +240,12 @@ public class GoodsDao extends HibernateDaoSupport {
 	 * @param pageSize
 	 * @return
 	 */
-	public List<Goods> findGoodsByName(String searchName, int startIndex, int pageSize) {
+	public List<Goods> findGoodsByName(String searchName, int startIndex,
+			int pageSize) {
 		String hql = "from Goods g where g.gname like '%" + searchName + "%'";
-		List<Goods> list = this.getHibernateTemplate()
-				.execute(new PageCallBackImpl<>(hql, new Object[] { searchName }, startIndex, pageSize));
+		System.out.println(hql);
+		List<Goods> list = this.getHibernateTemplate().execute(
+				new PageCallBackImpl<Goods>(hql, null, startIndex, pageSize));
 		return list;
 	}
 

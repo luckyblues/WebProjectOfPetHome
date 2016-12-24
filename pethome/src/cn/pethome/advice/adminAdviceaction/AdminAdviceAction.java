@@ -13,13 +13,13 @@ import cn.pethome.advice.service.AdviceService;
  * 后台管理建议
  * 
  * @author Administrator
- *
+ * 
  */
-public class AdminAdviceAction extends ActionSupport implements ModelDriven<Advice> {
+public class AdminAdviceAction extends ActionSupport implements
+		ModelDriven<Advice> {
 
 	private Advice advice = new Advice();
 
-	@Override
 	public Advice getModel() {
 		return advice;
 	}
@@ -41,9 +41,12 @@ public class AdminAdviceAction extends ActionSupport implements ModelDriven<Advi
 		List<Advice> list = adviceService.findAdvice();
 		// 将查到的集合存入值栈中
 		ActionContext.getContext().getValueStack().set("list", list);
-		// 将数据带到findAdvice对应的物理界面
-		return "findAdvice";
-
+		if (list.size() != 0) {
+			// 将数据带到findAdvice对应的物理界面
+			return "findAdvice";
+		} else {
+			return "noDate";
+		}
 	}
 
 	/**
@@ -54,7 +57,10 @@ public class AdminAdviceAction extends ActionSupport implements ModelDriven<Advi
 		 * 根据aid查询该主键对应的对象
 		 */
 		advice = adviceService.findDetailAdvice(advice.getAid());
-		return "detailAdvice";
-
+		if (advice == null) {
+			return "noData";
+		} else {
+			return "detailAdvice";
+		}
 	}
 }

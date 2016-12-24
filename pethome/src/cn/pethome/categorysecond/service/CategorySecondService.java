@@ -12,7 +12,7 @@ import cn.pethome.util.PageBean;
  * 二级分类的业务逻辑层
  * 
  * @author Administrator
- *
+ * 
  */
 
 public class CategorySecondService {
@@ -37,7 +37,7 @@ public class CategorySecondService {
 		PageBean pageBean = new PageBean();
 		// 封装当前页属性
 		pageBean.setCurrentPage(currentPage);
-		int pageSize = 8;
+		int pageSize = 6;
 		// 每页显示十条数据
 		pageBean.setPageSize(pageSize);
 		// 设置总共有多少条数据
@@ -54,13 +54,14 @@ public class CategorySecondService {
 		// 设置当前页的第一条数据是第多少条数据
 		int startIndex = (currentPage - 1) * pageSize;
 		// 设置pageBean中List中的二级分类数据
-		List<CategorySecond> list = categorySecondDao.findfindAllCategorySecond(startIndex, pageSize);
+		List<CategorySecond> list = categorySecondDao.findAllCategorySecond(
+				startIndex, pageSize);
 		pageBean.setList(list);
 		return pageBean;
 	}
 
 	/**
-	 * 后台genuine二级分类id找到该对象，
+	 * 后台根据二级分类id找到该二级分类的对象，
 	 * 
 	 * @param scid
 	 * @return
@@ -70,40 +71,55 @@ public class CategorySecondService {
 	}
 
 	/**
-	 * 根据刚刚找到的二级分类删除该二级分类
+	 * 根据二级分类对象删除该二级分类
 	 * 
 	 * @param categorySecond
+	 * @return
 	 */
-	public void delete(CategorySecond categorySecond) {
-		categorySecondDao.delete(categorySecond);
+	public boolean delete(CategorySecond categorySecond) {
+		if (categorySecondDao.delete(categorySecond)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
 	 * 保存二级分类
 	 * 
 	 * @param categorySecond
+	 * @return
 	 */
-	public void save(CategorySecond categorySecond) {
-		categorySecondDao.save(categorySecond);
+	public boolean save(CategorySecond categorySecond) {
+		if (categorySecondDao.save(categorySecond)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
 	 * 进行修改二级分类
 	 * 
 	 * @param categorySecond
+	 * @return
 	 */
-	public void update(CategorySecond categorySecond) {
+	public boolean update(CategorySecond categorySecond) {
 		// 调用Dao中放入方法进行修改
-		categorySecondDao.update(categorySecond);
+		if (categorySecondDao.update(categorySecond)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
-	 * 后台查找所有的二级分类
+	 * 3 后台查找所有的二级分类
 	 * 
 	 * @return
 	 */
 	public List<CategorySecond> findAll() {
-		
+
 		return categorySecondDao.findAll();
 	}
 

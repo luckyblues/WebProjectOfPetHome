@@ -12,7 +12,7 @@ import cn.pethome.category.domain.Category;
  * 一级分类的持久层
  * 
  * @author Administrator
- *
+ * 
  */
 public class CategoryDao extends HibernateDaoSupport {
 
@@ -46,8 +46,9 @@ public class CategoryDao extends HibernateDaoSupport {
 	 * @param category
 	 * @return
 	 */
-	public Object save(Category category) {
-		return this.getHibernateTemplate().save(category);
+	public boolean save(Category category) {
+		this.getHibernateTemplate().save(category);
+		return true;
 	}
 
 	/**
@@ -65,9 +66,11 @@ public class CategoryDao extends HibernateDaoSupport {
 	 * 删除一级分类
 	 * 
 	 * @param category
+	 * @return
 	 */
-	public void delete(Category category) {
+	public boolean delete(Category category) {
 		this.getHibernateTemplate().delete(category);
+		return true;
 	}
 
 	/**
@@ -76,8 +79,9 @@ public class CategoryDao extends HibernateDaoSupport {
 	 * @param category
 	 * @return
 	 */
-	public void update(Category category) {
+	public boolean update(Category category) {
 		this.getHibernateTemplate().update(category);
+		return true;
 	}
 
 }

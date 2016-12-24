@@ -9,7 +9,7 @@ import cn.pethome.categorysecond.domain.CategorySecond;
  * 一级分类的实体类
  * 
  * @author Administrator
- *
+ * 
  */
 public class Category {
 
@@ -17,7 +17,7 @@ public class Category {
 	private String cname;// 一级分类的名字
 	// 一级分类下面有很多二级分类，用set集合,并提供get set方法
 
-	private Set<CategorySecond> categorySecond = new HashSet<>();
+	private Set<CategorySecond> categorySecond = new HashSet<CategorySecond>();
 
 	public Set<CategorySecond> getCategorySecond() {
 		return categorySecond;

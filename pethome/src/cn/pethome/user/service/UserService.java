@@ -23,10 +23,14 @@ public class UserService {
 	}
 
 	// 用户注册
-	public void save(User user) {
+	public boolean save(User user) {
 		// 将数据存入到数据库
-		user.setUid(0);// 待解决问题
-		userDao.save(user);
+		// user.setUid(0);// 待解决问题
+		if (userDao.save(user)) {
+			return true;
+		} else {
+			return false;
+		}
 
 	}
 
@@ -71,8 +75,32 @@ public class UserService {
 	 * @return
 	 */
 	public User findByUid(Integer uid) {
-		
 		return userDao.findByUid(uid);
+	}
+
+	/**
+	 * 后台删除用户
+	 * 
+	 * @param user
+	 * @return
+	 */
+	public boolean delete(User user) {
+		if (userDao.delete(user)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * 修改用户
+	 */
+	public boolean updateUserInfo(User user) {
+		if (userDao.updateUserInfo(user)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

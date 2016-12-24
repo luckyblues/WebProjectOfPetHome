@@ -12,9 +12,12 @@ public class AdviceDao extends HibernateDaoSupport {
 	 * ±£¥ÊΩ®“È
 	 * 
 	 * @param advice
+	 * @return
 	 */
-	public void save(Advice advice) {
+	public boolean save(Advice advice) {
 		this.getHibernateTemplate().save(advice);
+		return true;
+
 	}
 
 	/**

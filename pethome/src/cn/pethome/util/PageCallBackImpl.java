@@ -14,7 +14,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
  * 都是用来分页显示的,其中的接口HibernateCallback需要去实现 这里面有封装的几个参数
  * 
  * @author Administrator
- *
+ * 
  * @param <T>
  */
 @SuppressWarnings("rawtypes")
@@ -27,7 +27,8 @@ public class PageCallBackImpl<T> implements HibernateCallback<List<T>> {
 
 	// 提供有参的构造函数
 
-	public PageCallBackImpl(String hql, Object[] params, Integer startIndex, Integer pageSize) {
+	public PageCallBackImpl(String hql, Object[] params, Integer startIndex,
+			Integer pageSize) {
 		super();
 		this.hql = hql;
 		this.params = params;
@@ -35,8 +36,8 @@ public class PageCallBackImpl<T> implements HibernateCallback<List<T>> {
 		this.pageSize = pageSize;
 	}
 
-	@Override
-	public List<T> doInHibernate(Session session) throws HibernateException, SQLException {
+	public List<T> doInHibernate(Session session) throws HibernateException,
+			SQLException {
 		// 根据Hibernate中的session调用其方法重载的方法createQuery（String
 		// value）执行hql，返回Query对象
 		Query query = session.createQuery(hql);

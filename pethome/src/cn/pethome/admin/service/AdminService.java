@@ -12,7 +12,7 @@ import cn.pethome.util.PageBean;
  * 管理员的业务逻辑层
  * 
  * @author Administrator
- *
+ * 
  */
 public class AdminService {
 	/*
@@ -35,5 +35,28 @@ public class AdminService {
 		return adminDao.login(admin);
 	}
 
-	
+	/**
+	 * 根据管理员id查找管理员的对象
+	 * 
+	 * @param aid
+	 * @return
+	 */
+	public Admin findAdmin(Integer aid) {
+		return adminDao.findAdmin(aid); 
+	}
+
+	/**
+	 * 保存新密码
+	 * 
+	 * @param admin
+	 * @return
+	 */
+	public boolean update(Admin admin) {
+		if (adminDao.update(admin)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

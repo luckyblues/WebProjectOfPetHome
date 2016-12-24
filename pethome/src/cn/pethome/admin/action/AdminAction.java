@@ -12,7 +12,7 @@ import cn.pethome.admin.service.AdminService;
  * 管理员的表现层
  * 
  * @author Administrator
- *
+ * 
  */
 
 public class AdminAction extends ActionSupport implements ModelDriven<Admin> {
@@ -21,9 +21,27 @@ public class AdminAction extends ActionSupport implements ModelDriven<Admin> {
 	// 创建管理员类存储数据
 	private Admin admin = new Admin();
 
-	@Override
 	public Admin getModel() {
 		return admin;
+	}
+
+	private String new_apwd;
+	private String confirm_apwd;
+
+	public String getConfirm_apwd() {
+		return confirm_apwd;
+	}
+
+	public void setConfirm_apwd(String confirm_apwd) {
+		this.confirm_apwd = confirm_apwd;
+	}
+
+	public String getNew_apwd() {
+		return new_apwd;
+	}
+
+	public void setNew_apwd(String new_apwd) {
+		this.new_apwd = new_apwd;
 	}
 
 	/*
@@ -47,7 +65,8 @@ public class AdminAction extends ActionSupport implements ModelDriven<Admin> {
 			return "loginFail";
 		} else {
 			// 如果有值则说明登录成功，则将值保存在session中
-			ServletActionContext.getRequest().getSession().setAttribute("existAdmin", existAdmin);
+			ServletActionContext.getRequest().getSession()
+					.setAttribute("existAdmin", existAdmin);
 			// 跳转到后台主页面
 			return "loginSuccess";
 		}
@@ -61,4 +80,31 @@ public class AdminAction extends ActionSupport implements ModelDriven<Admin> {
 		ServletActionContext.getRequest().getSession().invalidate();
 		return "exit";
 	}
+
+	/**
+	 * 修改密码
+	 */
+	public String editPwd() {
+		admin = adminService.findAdmin(admin.getAid());
+		if (admin == null) {
+			return "editFail";
+		} else {
+			return "findPwdSuccess";
+		}
+	}
+
+	/**
+	 * 修改密码
+	 */
+	public String updatePwd() {
+		admin.setApwd(new_apwd);
+		boolean updateSuccess = adminService.update(admin);
+		if (updateSuccess) {
+			ServletActionContext.getRequest().getSession().invalidate();
+			return "login";
+		} else {
+			return "updateFail";
+		}
+	}
+
 }

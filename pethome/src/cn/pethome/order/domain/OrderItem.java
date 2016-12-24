@@ -16,6 +16,9 @@ public class OrderItem {
 	 * 订单项是订单和商品之间衍生处理的第三张表，所以表里有商品id和订单id
 	 */
 	private Goods goods;
+	/**
+	 * 多个订单项属于一个订单，是多对一的关系，order作为一个外键
+	 */
 	private Order order;
 
 	public Integer getOitemid() {

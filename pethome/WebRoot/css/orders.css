@@ -1,0 +1,196 @@
+@CHARSET "UTF-8";
+
+* {
+	font-family: "微软雅黑";
+}
+
+/*我的账户页面*/
+.my-account-box {
+	width: 1288px;
+	height: 600px;
+	margin: 50px auto;
+}
+
+/*返回到首页样式*/
+.my-account-box .back {
+	width: 100%;
+	height: 20px;
+	padding-left: 60px;
+	margin: 20px auto;
+}
+
+.my-account-box .span-left {
+	width: 250px;
+	height: auto;
+	background: #FFF;
+	float: left;
+	margin-left: 10px;
+	box-shadow: 0 0 18px #DDD;
+	-webkit-box-shadow: 0 0 18px #DDD;
+	-moz-box-shadow: 0 0 18px #DDD;
+	-ms-box-shadow: 0 0 18px #DDD;
+	-o-box-shadow: 0 0 18px #DDD;
+}
+
+/*左侧我的账户分类*/
+.span-left .uc-nav-box {
+	width: 250px;
+	height: auto;
+	background: #FFF;
+}
+
+.uc-nav-box .uc-nav-head {
+	width: 250px;
+	height: 52px;
+	line-height: 52px;
+}
+
+.uc-nav-head h3 {
+	font-size: 16px;
+	font-weight: normal;
+	color: #F00;
+	text-align: center;
+	/*border-bottom:1px solid #DDD;*/
+}
+
+.uc-nav-box .uc-nav-body {
+	width: 250px;
+	height: auto;
+	border-bottom: 1px solid #DDD;
+}
+
+.uc-nav-body a {
+	display: block;
+	width: 250px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	color: #757575;
+	font-size: 15px;
+	text-decoration: none;
+}
+
+.uc-nav-body a:hover {
+	color: #60C;
+}
+
+.my-account-box .span-right {
+	width: 1000px;
+	height: 1100px;
+	background: #fff;
+	float: right;
+	box-shadow: 0 0 18px #DDD;
+	-webkit-box-shadow: 0 0 18px #DDD;
+	-moz-box-shadow: 0 0 18px #DDD;
+	-ms-box-shadow: 0 0 18px #DDD;
+	-o-box-shadow: 0 0 18px #DDD;
+}
+
+.span-right .box {
+	width: 700px;
+	height: 300px;
+	margin: 20px auto;
+}
+
+.span-right .addressInfo {
+	width: 700px;
+	height: 80px;
+	background-color: rgb(245, 245, 245);
+	margin: 40px auto;
+	margin-bottom: 20px;
+	line-height: 40px;
+	border: 1px solid #ccc;
+	margin-bottom: 20px;
+}
+
+.addressInfo .top {
+	width: 700px;
+	height: 100px;
+}
+
+.addressInfo  .person {
+	margin-left: 30px;
+}
+
+.addressInfo .tele {
+	margin-right: 30px;
+	float: right;
+}
+
+.addressInfo .address {
+	margin-left: 30px;
+}
+
+.span-right .orderDes {
+	margin-top: 20px;
+	width: 700px;
+	height: 224px;
+	margin: 0 auto;
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+}
+
+.orderDes .number {
+	width: 100%;
+	height: 42px;
+	background-color: rgb(234, 255, 248);
+	border-bottom: 1px solid #ccc;
+	line-height: 42px;
+}
+
+.orderDes .number .date {
+	float: left;
+	width: 225px;
+	margin-left: 30px;
+}
+
+.orderDes .number .orderNum {
+	float: left;
+	width: 225px;
+}
+
+.orderDes table tbody tr {
+	width: 700px;
+	text-align: center;
+}
+
+.orderDes table tbody td {
+	width: 100px;
+}
+
+.orderDes table tbody td:first-child {
+	width: 550px;
+}
+
+.orderDes table tbody tr .pic {
+	width: 100px;
+	float: left;
+	text-align: center;
+	height: 134px;
+	line-height: 130px;
+}
+
+.orderDes table tbody tr .pic img {
+	width: 80px;
+	height: 80px;
+	margin-top: 20px;
+}
+
+.orderDes table tbody tr .descript {
+	width: 400px;
+	float: left;
+	line-height: 134px;
+}
+
+.money {
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	border-top: 1px solid #ccc;
+	text-align: right;
+	background-color: rgb(234, 255, 248);
+}
+
+.money .relMoney {
+	margin-right: 30px;
+}

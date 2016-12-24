@@ -21,9 +21,10 @@ import cn.pethome.util.PageBean;
  * 后台二级分类Action
  * 
  * @author Administrator
- *
+ * 
  */
-public class AdminCSAction extends ActionSupport implements ModelDriven<CategorySecond> {
+public class AdminCSAction extends ActionSupport implements
+		ModelDriven<CategorySecond> {
 
 	private static final long serialVersionUID = 1L;
 	/**
@@ -48,7 +49,6 @@ public class AdminCSAction extends ActionSupport implements ModelDriven<Category
 	// 实现模型驱动
 	private CategorySecond categorySecond = new CategorySecond();
 
-	@Override
 	public CategorySecond getModel() {
 		return categorySecond;
 	}
@@ -78,7 +78,8 @@ public class AdminCSAction extends ActionSupport implements ModelDriven<Category
 	 */
 	private CategorySecondService categorySecondService;
 
-	public void setCategorySecondService(CategorySecondService categorySecondService) {
+	public void setCategorySecondService(
+			CategorySecondService categorySecondService) {
 		this.categorySecondService = categorySecondService;
 	}
 
@@ -97,10 +98,16 @@ public class AdminCSAction extends ActionSupport implements ModelDriven<Category
 
 	public String findAllCategorySecond() {
 		// 调用adminService方法findAllCategorySecondlist
-		PageBean pageBean = categorySecondService.findAllCategorySecond(currentPage);
-		// 将查询到结果集存储到值栈中
-		ActionContext.getContext().getValueStack().set("pageBean", pageBean);
-		return "findAllCategorySecond";
+		PageBean pageBean = categorySecondService
+				.findAllCategorySecond(currentPage);
+		if (pageBean.getList().size() == 0) {
+			return "noData";
+		} else {
+			// 将查询到结果集存储到值栈中
+			ActionContext.getContext().getValueStack()
+					.set("pageBean", pageBean);
+			return "findSuccess";
+		}
 	}
 
 	/**
@@ -128,7 +135,8 @@ public class AdminCSAction extends ActionSupport implements ModelDriven<Category
 		 * Struts2图片上传，判断上传的图片是否为空
 		 */
 		// 获取上传图片的目录
-		String realpath = ServletActionContext.getServletContext().getRealPath("/images/categoryImage");
+		String realpath = ServletActionContext.getServletContext().getRealPath(
+				"/petimage");
 
 		if (upload != null) {
 			// 如果上传图片不为空，则把图片上传到服务器
@@ -142,12 +150,21 @@ public class AdminCSAction extends ActionSupport implements ModelDriven<Category
 			// 把文件upload 拷贝到 disk里,FileUtils类需要commons-io-x.x.x.jar包支持
 			FileUtils.copyFile(upload, disk);
 			// 封装二级分类的图片名字
-			categorySecond.setScimg(uploadFileName);
+			categorySecond.setScimg("petimage/" + uploadFileName);
 		}
-		categorySecond.setCategory(categoryService.findByCid(cid));
+		// 设置二级分类中的所属一级分类
+		Category category = categoryService.findByCid(cid);
+		if (category != null) {
+			categorySecond.setCategory(category);
+		}
 		// 调用Service中的方法
-		categorySecondService.save(categorySecond);
-		return "addCategorySecond";
+		boolean addSuccess = categorySecondService.save(categorySecond);
+		if (addSuccess) {
+			return "addSuccess";
+		} else {
+			return "addFail";
+		}
+
 	}
 
 	/**
@@ -155,20 +172,25 @@ public class AdminCSAction extends ActionSupport implements ModelDriven<Category
 	 */
 	public String delCategorySecond() {
 		// 先根据二级分类的id获取该对象
-		categorySecond = categorySecondService.findByScid(categorySecond.getScid());
+		categorySecond = categorySecondService.findByScid(categorySecond
+				.getScid());
 		// 删除上传的图片
 		String path = categorySecond.getScimg();
 		if (path != null) {
 			// 获取磁盘路径
-			String realPath = ServletActionContext.getServletContext().getRealPath("/images/categoryImage/" + path);
+			String realPath = ServletActionContext.getServletContext()
+					.getRealPath("/" + path);
 			File file = new File(realPath);
 			// 删除
 			file.delete();
 		}
 		// 根据找到的对象删除该二级分类
-		categorySecondService.delete(categorySecond);
-		return "delCategorySecond";
-
+		boolean delSuccess = categorySecondService.delete(categorySecond);
+		if (delSuccess) {
+			return "delSuccess";
+		} else {
+			return "delFail";
+		}
 	}
 
 	/**
@@ -176,13 +198,17 @@ public class AdminCSAction extends ActionSupport implements ModelDriven<Category
 	 */
 	public String edit() {
 		// 调用Service中的方法根据id查询二级分类
-		categorySecond = categorySecondService.findByScid(categorySecond.getScid());
+		categorySecond = categorySecondService.findByScid(categorySecond
+				.getScid());
 		// 查询所有的一级分类
 		List<Category> list = categoryService.findAllCategory();
-		// 将数据保存在值栈中
-		ActionContext.getContext().getValueStack().set("list", list);
-		return "edit";
-
+		if (list.size() == 0) {
+			return "noData";
+		} else {
+			// 将数据保存在值栈中
+			ActionContext.getContext().getValueStack().set("list", list);
+			return "editSecondLevel";
+		}
 	}
 
 	/**
@@ -192,14 +218,15 @@ public class AdminCSAction extends ActionSupport implements ModelDriven<Category
 	 */
 	public String updateCategorySecond() throws IOException {
 		// 获取图片上传路径
-		String delPath = ServletActionContext.getServletContext()
-				.getRealPath("/images/categoryImage/" + categorySecond.getScimg());
+		String getPath = ServletActionContext.getServletContext().getRealPath(
+				"/" + categorySecond.getScimg());
 		// 进行判断
 		if (upload != null) {
-			File file = new File(delPath);
-			file.delete();
+			File file = new File(getPath);
+			// file.delete();
 			// 获得图片上传到服务器的路径
-			String realPath = ServletActionContext.getServletContext().getRealPath("/images/categoryImage");
+			String realPath = ServletActionContext.getServletContext()
+					.getRealPath("/petimage");
 			// 创建文件
 			File disk = new File(realPath + "//" + uploadFileName);
 			// 如果不存在，则创建新的文件
@@ -207,11 +234,16 @@ public class AdminCSAction extends ActionSupport implements ModelDriven<Category
 				disk.getParentFile().mkdirs();
 			}
 			FileUtils.copyFile(upload, disk);
-			categorySecond.setScimg(uploadFileName);
+			categorySecond.setScimg("petimage/" + uploadFileName);
 		}
-		// 然后调用Service中放入update方法进行修改
-		categorySecondService.update(categorySecond);
-		return "updateCategorySecond";
 
+		// 然后调用Service中放入update方法进行修改
+		// 调用Service的方法进行修改
+		boolean updateSuccess = categorySecondService.update(categorySecond);
+		if (updateSuccess) {
+			return "updateSuccess";
+		} else {
+			return "updateFail";
+		}
 	}
 }

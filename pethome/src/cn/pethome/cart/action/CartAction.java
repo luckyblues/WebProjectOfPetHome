@@ -76,7 +76,7 @@ public class CartAction extends ActionSupport {
 		// 将封装好的CartItem封装在Cart中
 		cart.putCart(cartItem);
 
-		return "addtoCart";
+		return "addSuccess";
 
 	}
 
@@ -90,7 +90,7 @@ public class CartAction extends ActionSupport {
 		Cart cart = addCartSession();
 		// 调用Cart里面的删除方法删除
 		cart.deleteOneGoods(gid);
-		return "deleteOneCartItem";
+		return "delSuccess";
 
 	}
 
@@ -105,7 +105,7 @@ public class CartAction extends ActionSupport {
 		// 调用cart对象中的方法删除全部商品
 		cart.deleteAll();
 		// 返回到相应的jsp页面
-		return "deleteAll";
+		return "emptySuccess";
 
 	}
 

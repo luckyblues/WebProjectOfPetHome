@@ -3,7 +3,6 @@ package cn.pethome.categorysecond.dao;
 import java.util.List;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-
 import cn.pethome.categorysecond.domain.CategorySecond;
 import cn.pethome.util.PageCallBackImpl;
 
@@ -35,10 +34,12 @@ public class CategorySecondDao extends HibernateDaoSupport {
 	 * @return
 	 */
 
-	public List<CategorySecond> findfindAllCategorySecond(int startIndex, int pageSize) {
+	public List<CategorySecond> findAllCategorySecond(int startIndex,
+			int pageSize) {
 		String hql = "from CategorySecond order by scid asc";
-		List<CategorySecond> list = this.getHibernateTemplate()
-				.execute(new PageCallBackImpl<>(hql, null, startIndex, pageSize));
+		List<CategorySecond> list = this.getHibernateTemplate().execute(
+				new PageCallBackImpl<CategorySecond>(hql, null, startIndex,
+						pageSize));
 		return list;
 	}
 
@@ -56,27 +57,33 @@ public class CategorySecondDao extends HibernateDaoSupport {
 	 * 后台删除二级分类方法
 	 * 
 	 * @param categorySecond
+	 * @return
 	 */
-	public void delete(CategorySecond categorySecond) {
+	public boolean delete(CategorySecond categorySecond) {
 		this.getHibernateTemplate().delete(categorySecond);
+		return true;
 	}
 
 	/**
 	 * 添加二级分类
 	 * 
 	 * @param categorySecond
+	 * @return
 	 */
-	public void save(CategorySecond categorySecond) {
+	public boolean save(CategorySecond categorySecond) {
 		this.getHibernateTemplate().save(categorySecond);
+		return true;
 	}
 
 	/**
 	 * Dao中进行二级分类的修改
 	 * 
 	 * @param categorySecond
+	 * @return
 	 */
-	public void update(CategorySecond categorySecond) {
+	public boolean update(CategorySecond categorySecond) {
 		this.getHibernateTemplate().update(categorySecond);
+		return true;
 	}
 
 	/**

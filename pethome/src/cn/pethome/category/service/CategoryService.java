@@ -11,7 +11,7 @@ import cn.pethome.category.domain.Category;
  * 一级分类的业务层
  * 
  * @author Administrator
- *
+ * 
  */
 @Transactional
 public class CategoryService {
@@ -48,9 +48,14 @@ public class CategoryService {
 	 * 后台添加一级分类
 	 * 
 	 * @param category
+	 * @return
 	 */
-	public void save(Category category) {
-		categoryDao.save(category);
+	public boolean save(Category category) {
+		if (categoryDao.save(category)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -68,10 +73,15 @@ public class CategoryService {
 	 * 根据查到的一级分类，将其删除
 	 * 
 	 * @param category
+	 * @return
 	 */
-	public void delete(Category category) {
+	public boolean delete(Category category) {
 		// 调用Dao里面的方法
-		categoryDao.delete(category);
+		if (categoryDao.delete(category)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -80,8 +90,12 @@ public class CategoryService {
 	 * @param category
 	 * @return
 	 */
-	public void update(Category category) {
-		categoryDao.update(category);
+	public boolean update(Category category) {
+		if (categoryDao.update(category)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

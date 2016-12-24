@@ -19,15 +19,17 @@ public class UserDao extends HibernateDaoSupport {
 		return null;
 	}
 
-	public void save(User user) {
+	public boolean save(User user) {
 		this.getHibernateTemplate().save(user);
+		return true;
 
 	}
 
 	// 用户登录
 	public User login(User user) {
 		String hql = "from User where uname = ? and upwd = ?";
-		List<User> list = this.getHibernateTemplate().find(hql, user.getUname(), user.getUpwd());
+		List<User> list = this.getHibernateTemplate().find(hql,
+				user.getUname(), user.getUpwd());
 		if (list != null && list.size() > 0) {
 			return list.get(0);
 		}
@@ -42,9 +44,9 @@ public class UserDao extends HibernateDaoSupport {
 	public int findCount() {
 		String hql = "select count(*) from User";
 		List<Long> list = this.getHibernateTemplate().find(hql);
-		if (list != null && list.size() > 0) {
+		if (list != null) {
 			// 如果取出的值不为空即有值的话，就将其中的下标值为0的第一个Long类型数据取出，并转化为int类型
-			list.get(0).intValue();
+			return list.get(0).intValue();
 		}
 		return 0;
 	}
@@ -58,7 +60,8 @@ public class UserDao extends HibernateDaoSupport {
 	 */
 	public List<User> findAllUser(int startIndex, int pageSize) {
 		String hql = "from User";
-		List<User> list = this.getHibernateTemplate().execute(new PageCallBackImpl<>(hql, null, startIndex, pageSize));
+		List<User> list = this.getHibernateTemplate().execute(
+				new PageCallBackImpl<User>(hql, null, startIndex, pageSize));
 		return list;
 	}
 
@@ -71,4 +74,24 @@ public class UserDao extends HibernateDaoSupport {
 	public User findByUid(Integer uid) {
 		return this.getHibernateTemplate().get(User.class, uid);
 	}
+
+	/**
+	 * 后台删除用户
+	 * 
+	 * @param user
+	 * @return
+	 */
+	public boolean delete(User user) {
+		this.getHibernateTemplate().delete(user);
+		return true;
+	}
+
+	/**
+	 * 修改用户
+	 */
+	public boolean updateUserInfo(User user) {
+		this.getHibernateTemplate().update(user);
+		return true;
+	}
+
 }

@@ -1,12 +1,12 @@
 package cn.pethome.goods.action;
 
-import com.opensymphony.xwork2.ActionContext;
-import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
-
 import cn.pethome.goods.domain.Goods;
 import cn.pethome.goods.service.GoodsService;
 import cn.pethome.util.PageBean;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.ModelDriven;
 
 /**
  * 商品的表现层实现
@@ -62,10 +62,10 @@ public class GoodsAction extends ActionSupport implements ModelDriven<Goods> {
 		this.currentPage = currentPage;
 	}
 
-	@Override
 	public Goods getModel() {
 		return goods;
 	}
+
 	// 注入GoodsService，并提供set方法
 
 	private GoodsService goodsService;
@@ -84,8 +84,11 @@ public class GoodsAction extends ActionSupport implements ModelDriven<Goods> {
 		 * 因为实现模型驱动的原因，所以这里可以直接获取商品主键，并且这里不需要在重新创建商品对象，因为模型驱动的对象是位于栈顶的，
 		 */
 		goods = goodsService.findDetailGoods(goods.getGid());
-		return "findDetailGoods";
-
+		if (goods == null) {
+			return "noData";
+		} else {
+			return "findDetailGoods";
+		}
 	}
 
 	/**
@@ -97,9 +100,14 @@ public class GoodsAction extends ActionSupport implements ModelDriven<Goods> {
 	public String findGoodsByScid() {
 		// 调用goodsService中的方法查询商品集合并带有分页，返回的对象是pageBean
 		PageBean pageBean = goodsService.findGoodsByScid(scid, currentPage);
-		// 将结果存到值栈中去,set保存pageBean对象,以键值对的形式存储
-		ActionContext.getContext().getValueStack().set("pageBean", pageBean);
-		return "findGoodsByScid";
+		if (pageBean.getList().size() == 0) {
+			return "noData";
+		} else {
+			// 将结果存到值栈中去,set保存pageBean对象,以键值对的形式存储
+			ActionContext.getContext().getValueStack()
+					.set("pageBean", pageBean);
+			return "getGoodsByScid";
+		}
 	}
 
 	/**
@@ -110,10 +118,14 @@ public class GoodsAction extends ActionSupport implements ModelDriven<Goods> {
 
 	public String findGoodsByCid() {
 		PageBean pageBean = goodsService.findGoodsByCid(cid, currentPage);
-		// 把PAgeBean对象保存到值栈中
-		ActionContext.getContext().getValueStack().set("pageBean", pageBean);
-		return "findGoodsByCid";
-
+		if (pageBean.getList().size() == 0) {
+			return "noData";
+		} else {
+			// 把PAgeBean对象保存到值栈中
+			ActionContext.getContext().getValueStack()
+					.set("pageBean", pageBean);
+			return "getGoodsByCid";
+		}
 	}
 
 	/**
@@ -121,10 +133,23 @@ public class GoodsAction extends ActionSupport implements ModelDriven<Goods> {
 	 */
 	public String findGoodsByName() {
 		// 调用Service中的方法
-		PageBean pageBean = goodsService.findAllGoodsByName(searchName, currentPage);
-		// 将结果存入值栈中
-		ActionContext.getContext().getValueStack().set("pageBean", pageBean);
-		return "findGoodsByName";
+		// System.out.println("关键字：" + searchName);
+		if (searchName == null) {
+			return "noData";
+		} else {
+			PageBean pageBean = goodsService.findAllGoodsByName(searchName,
+					currentPage);
+			// 将结果存入值栈中
+			ActionContext.getContext().getValueStack()
+					.set("pageBean", pageBean);
+			// ActionContext.getContext().put("sN", "ABC");
+			// System.out.println("关键字222：" + searchName);
+			if (pageBean.getList().size() == 0) {
+				return "noData";
+			} else {
+				return "findSearchSuccess";
+			}
+		}
 	}
 
 }

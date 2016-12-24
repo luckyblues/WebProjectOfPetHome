@@ -15,12 +15,12 @@ import cn.pethome.category.service.CategoryService;
  * 后台一级分类管理的表现层
  * 
  * @author Administrator
- *
+ * 
  */
-public class AdminCategoryAction extends ActionSupport implements ModelDriven<Category> {
+public class AdminCategoryAction extends ActionSupport implements
+		ModelDriven<Category> {
 	private Category category = new Category();
 
-	@Override
 	public Category getModel() {
 		return category;
 	}
@@ -41,19 +41,26 @@ public class AdminCategoryAction extends ActionSupport implements ModelDriven<Ca
 	public String findAllAdminCategory() {
 		// 调用adminService的方法返回集合，并将结果保存在值栈中
 		List<Category> lists = categoryService.findAllCategory();
-		// 保存在值栈中
-		ActionContext.getContext().getValueStack().set("lists", lists);
-		// 将值栈中的数据带到findAllCategory对应的物理界面
-		return "findAllAdminCategory";
-
+		if (lists.size() == 0) {
+			return "noData";
+		} else {
+			// 保存在值栈中
+			ActionContext.getContext().getValueStack().set("lists", lists);
+			// 将值栈中的数据带到findAllCategory对应的物理界面
+			return "findAllAdminCategory";
+		}
 	}
 
 	/**
 	 * 添加一级分类
 	 */
 	public String addCategory() {
-		categoryService.save(category);
-		return "addCategory";
+		boolean addSuccess = categoryService.save(category);
+		if (addSuccess) {
+			return "addCategory";
+		} else {
+			return "addFail";
+		}
 	}
 
 	/**
@@ -63,8 +70,12 @@ public class AdminCategoryAction extends ActionSupport implements ModelDriven<Ca
 		// 根据id查询出该一级分类
 		category = categoryService.findByCid(category.getCid());
 		// 将该一级分类删除
-		categoryService.delete(category);
-		return "delCategory";
+		boolean delSuccess = categoryService.delete(category);
+		if (delSuccess) {
+			return "delCategory";
+		} else {
+			return "delFail";
+		}
 	}
 
 	/**
@@ -72,14 +83,23 @@ public class AdminCategoryAction extends ActionSupport implements ModelDriven<Ca
 	 */
 	public String findByCid() {
 		category = categoryService.findByCid(category.getCid());
-		return "findByCid";
+		if (category == null) {
+			return "noData";
+		} else {
+			return "findByCid";
+		}
 	}
 
 	/**
 	 * 后台修改一级分类名称功能
 	 */
 	public String updateCategory() {
-		categoryService.update(category);
-		return "updateCategory";
+		boolean updateSuccess = categoryService.update(category);
+		if (updateSuccess) {
+			return "updateCategory";
+		} else {
+			return "updateFail";
+		}
+
 	}
 }

@@ -1,0 +1,166 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "微软雅黑";
+	background-color: #eee;
+}
+
+.header {
+	height: 58px;
+	background-color: #333;
+}
+
+.header .inner_c {
+	width: 1000px;
+	height: 58px;
+	margin: 0 auto;
+}
+
+.header .inner_c h1 {
+	padding-left: 15px;
+	width: 170px;
+	height: 58px;
+	float: left;
+	padding-right: 40px;
+}
+
+.header .inner_c .nav {
+	width: 607px;
+	height: 58px;
+	float: left;
+}
+
+.header .inner_c .nav ul {
+	list-style: none;
+}
+
+.header .inner_c .nav ul li {
+	float: left;
+	width: 90px;
+	height: 58px;
+	text-align: center;
+	line-height: 58px;
+}
+
+.header .inner_c .nav ul li.last {
+	border-right: 1px solid #252947;
+}
+
+.header .inner_c .nav ul li a {
+	display: block;
+	width: 100px;
+	height: 58px;
+	text-decoration: none;
+	color: white;
+	font-size: 14px;
+}
+
+.header .inner_c .nav ul li a:hover {
+	background-color: #f03;
+}
+
+.cl {
+	clear: both;
+}
+
+.banner {
+	position: relative;
+	margin-top: 20px;
+}
+
+.content {
+	height: 700px;
+}
+
+.content .inner_c {
+	width: 1010px;
+	height: 700px;
+	margin: 0 auto;
+	padding-top: 20px;
+}
+
+.content .inner_c .product {
+	position: relative;
+}
+
+.content .inner_c .product ul {
+	list-style: none;
+}
+
+.content .inner_c .product ul li {
+	float: left;
+	width: 244px;
+	height: 280px;
+	margin-right: 8px;
+	margin-bottom: 8px;
+	background-color: #fff;
+}
+
+.content .inner_c .product ul li.last {
+	margin-right: 0;
+}
+
+.content .inner_c .product .desdetail {
+	display: block;
+	text-decoration: none;
+}
+
+.content .inner_c .product ul li img {
+	width: 100%;
+	height: 185px;
+}
+
+.content .inner_c .product ul li h3 {
+	padding: 8px;
+	text-decoration: none;
+	line-height: 22px;
+	font-size: 16px;
+	font-weight: bold;
+	color: black;
+}
+
+.content .inner_c .product ul li .time {
+	padding: 8px;
+	line-height: 12px;
+	font-size: 14px;
+	color: gray;
+}
+
+/* 宠物知识详情 */
+.content .inner_c .knowdetail {
+	width: 100%;
+	border: 1px solid #ddd;
+}
+
+.content .inner_c .knowdetail .title {
+	position: relative;
+	margin-top: 10px;
+	padding: 20px 90px;
+	color: #a6a6a6;
+	text-align: center;
+	font-weight: 400;
+	font-size: 18px;
+}
+
+.content .inner_c .knowdetail .detailcont {
+	margin: 20px;
+}
+
+.knowdetail .detailcont .detailimg img {
+	width: 800px;
+	height: 500px;
+	margin: 20px 60px;
+}
+
+.detailcont p {
+	width: 100%;
+	height: 100px;
+	margin-top: 20px;
+	letter-spacing: 1.5px;
+	color: #333;
+	font-size: 16px;
+	font-stretch: expanded;
+}

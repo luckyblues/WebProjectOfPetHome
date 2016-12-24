@@ -9,7 +9,7 @@ import cn.pethome.advice.domain.Advice;
  * Advice的业务逻辑层
  * 
  * @author Administrator
- *
+ * 
  */
 public class AdviceService {
 	/**
@@ -25,9 +25,14 @@ public class AdviceService {
 	 * 保存建议
 	 * 
 	 * @param advice
+	 * @return
 	 */
-	public void save(Advice advice) {
-		adviceDao.save(advice);
+	public boolean save(Advice advice) {
+		if (adviceDao.save(advice)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -41,6 +46,7 @@ public class AdviceService {
 
 	/**
 	 * 后台查看建议详情
+	 * 
 	 * @param aid
 	 * @return
 	 */

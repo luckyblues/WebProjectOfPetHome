@@ -1,0 +1,155 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "微软雅黑";
+	font-size: 16px;
+}
+
+.goods-box {
+	width: 1228px;
+	height: auto;
+	margin: 20px auto;
+}
+
+.goods-box .back {
+	height: 40px;
+	background: #f5f5f5;
+	margin: 0 auto;
+}
+
+.back a {
+	width: 70px;
+	height: 40px;
+	font-size: 15px;
+	display: block;
+	line-height: 40px;
+	color: #f03;
+	padding-left: 50px;
+	text-decoration: none;
+}
+
+.goods-detail {
+	width: 1228px;
+	height: 700px;
+	background: #f5f5f5;
+}
+
+.goods-detail-info {
+	background: #FFF;
+	height: auto;
+	box-shadow: 8px 8px 8px #DDD;
+}
+
+.goods-detail-info .goods-container {
+	width: 1228px;
+	height: 550px;
+	margin: 0 auto;
+}
+
+.goods-container .goods-left {
+	width: 670px;
+	height: 550px;
+	position: relative;
+	float: left;
+	border-right: 1px solid #f5f5f5;
+}
+
+.goods-container .goods-right {
+	width: 520px;
+	height: 550px;
+	float: right;
+}
+
+.goods-left .big-goods-pic {
+	position: absolute;
+	top: 150px;
+	left: 300px;
+	cursor: pointer;
+}
+
+.goods-left .small-goods-pic {
+	width: 100px;
+	height: 100px;
+	border: 1px solid #F33;
+	position: absolute;
+	top: 200px;
+	left: 50px;
+	cursor: pointer;
+}
+
+.goods-right h1 {
+	width: 520px;
+	height: 80px;
+	font-size: 22px;
+	font-weight: 400;
+	line-height: 60px;
+	margin-top: 30px;
+}
+
+.goods-right h2 {
+	width: 350px;
+	height: 100px;
+	font-weight: normal;
+	padding-top: 40px;
+	font-size: 16px;
+	/*	background:#093;*/
+	color: #757575;
+	border-bottom: 1px solid #DDD;
+}
+
+.goods-right h3 {
+	width: 520px;
+	height: 70px;
+	color: #F03;
+	font-size: 16px;
+	margin-top: 30px;
+}
+
+
+.goods-right #addto,#tobuy{
+	
+	display: block;
+	width: 230px;
+	height: 60px;
+	float:left;
+	line-height: 60px;
+	color: #FFF;
+	background: #F03;
+	text-decoration: none;
+	border: 1px solid #f03;
+	margin-left: 20px;
+	margin-top: 50px;
+	text-align: center;
+	font-size: 17px;
+}
+.goods-right h4{
+	width: 400px;
+	height: 30px;
+}
+.goods-right span{
+	font-size:28px;
+	font-weight:normal;
+	color:#F03;
+	padding-left:20px;
+}
+.goods-right .count{
+	font-size:14px;
+	color:#434343;
+	margin-left: 5px;
+	
+}
+.goods-right input{
+	width:40px;
+	height:25px;
+	text-align:center;
+	font-size:14px;
+	color:#434343;
+	margin-left: 5px;
+
+}
+.goods-right #addto:hover,,#tobuy:hover{
+	transform: translateY(-1px);
+	box-shadow: 4px 4px 4px #DDD;
+}

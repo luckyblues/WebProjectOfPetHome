@@ -23,6 +23,17 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		return user;
 	}
 
+	// 接受uid参数
+	private Integer uid;
+
+	public Integer getUid() {
+		return uid;
+	}
+
+	public void setUid(Integer uid) {
+		this.uid = uid;
+	}
+
 	// 注入UserService
 	private UserService userService;
 
@@ -53,7 +64,7 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 
 	// 用户注册的方法
 	public String register() {
-		userService.save(user);
+		boolean saveSuccess = userService.save(user);
 		return LOGIN;
 	}
 
@@ -69,7 +80,8 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 			this.addActionError("用户名或密码错误");// 登录失败
 			return LOGIN;
 		} else {// 登录成功
-			ServletActionContext.getRequest().getSession().setAttribute("existUser", existUser);// 将用户信息存到session中
+			ServletActionContext.getRequest().getSession()
+					.setAttribute("existUser", existUser);// 将用户信息存到session中
 			return "loginSuccess";// 完成页面的跳转
 		}
 	}
@@ -81,4 +93,47 @@ public class UserAction extends ActionSupport implements ModelDriven<User> {
 		return "exit";
 	}
 
+	/**
+	 * 跳转到我的账户页面
+	 */
+	public String myaccount() {
+		return "myaccount";
+	}
+
+	/**
+	 * 用户查看个人信息
+	 */
+	public String findUserInfo() {
+		user = userService.findByUid(user.getUid());
+		if (user == null) {
+			return "noData";
+		} else {
+			return "findInfoSuccess";
+		}
+
+	}
+
+	/**
+	 * 跳转到修改个人信息界面
+	 * */
+	public String editUserInfo() {
+		user = userService.findByUid(user.getUid());
+		if (user == null) {
+			return "noData";
+		} else {
+			return "editInfoSuccess";
+		}
+	}
+
+	/**
+	 * 修改个人信息
+	 * */
+	public String updateUserInfo() {
+		boolean updateSuccess = userService.updateUserInfo(user);
+		if (updateSuccess) {
+			return "updateInfoSuccess";
+		} else {
+			return "updateFail";
+		}
+	}
 }

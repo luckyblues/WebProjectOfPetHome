@@ -13,7 +13,7 @@ import cn.pethome.util.PageCallBackImpl;
  * 管理员的持久层
  * 
  * @author Administrator
- *
+ * 
  */
 public class AdminDao extends HibernateDaoSupport {
 	/**
@@ -26,13 +26,36 @@ public class AdminDao extends HibernateDaoSupport {
 		// hql语句
 		String hql = "from Admin where aname=? and apwd=?";
 		// 将hql语句以及里面的占位符，传入getHibernateTemplate的find方法中执行
-		List<Admin> list = this.getHibernateTemplate().find(hql, admin.getAname(), admin.getApwd());
+		List<Admin> list = this.getHibernateTemplate().find(hql,
+				admin.getAname(), admin.getApwd());
 		// 判断list是否有值
 		if (list != null && list.size() > 0) {
 			// 如果有的话就取出并返回
 			return list.get(0);
 		}
 		return null;
+	}
+
+	/**
+	 * 根据id获得管理员对象
+	 * 
+	 * @param aid
+	 * @return
+	 */
+	public Admin findAdmin(Integer aid) {
+		return this.getHibernateTemplate().get(Admin.class, aid);
+	}
+
+	/**
+	 * 修改密码
+	 * 
+	 * @param admin
+	 * @return
+	 */
+	public boolean update(Admin admin) {
+		this.getHibernateTemplate().update(admin);
+		return true;
+
 	}
 
 }

@@ -15,7 +15,7 @@ import cn.pethome.util.PageBean;
  * 访问首页的Action,首页要显示的有一级分类，二级分类，二级分类下的商品
  * 
  * @author yrh
- *
+ * 
  */
 public class IndexAction extends ActionSupport {
 
@@ -44,7 +44,7 @@ public class IndexAction extends ActionSupport {
 		 */
 		List<Category> clist = categoryService.findAllCategory();
 
-		ActionContext.getContext().getSession().put("clist", clist);
+		ActionContext.getContext().getValueStack().set("clist", clist);
 
 		/**
 		 * 查询热门商品
@@ -59,8 +59,11 @@ public class IndexAction extends ActionSupport {
 		List<Goods> nlist = goodsService.findNewGoods();
 		// 将返回的nlist数据保存在值栈中
 		ActionContext.getContext().getValueStack().set("nlist", nlist);
-
-		return "index";
+		if (clist.size() != 0 && hlist.size() != 0 && nlist.size() != 0) {
+			return "index";
+		} else {
+			return "noData";
+		}
 	}
 
 }

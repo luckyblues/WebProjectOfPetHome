@@ -10,7 +10,7 @@ import cn.pethome.util.PageBean;
  * 商品的业务层实现
  * 
  * @author Administrator
- *
+ * 
  */
 public class GoodsService {
 	/**
@@ -68,7 +68,8 @@ public class GoodsService {
 		// 设置当前页的第一条数据是第多少条数据
 		int startIndex = (currentPage - 1) * pageSize;
 		// 封装最后的商品集合,根据二级分类的scid和currentPage当前页来查询
-		List<Goods> glist = goodsDao.findGoodsByScid(scid, startIndex, pageSize);
+		List<Goods> glist = goodsDao
+				.findGoodsByScid(scid, startIndex, pageSize);
 		pageBean.setList(glist);
 		// 将封装好的pageBean对象返回
 		return pageBean;
@@ -83,7 +84,7 @@ public class GoodsService {
 	 */
 	public PageBean findGoodsByCid(Integer cid, Integer currentPage) {
 		// 创建一个PageBean对象
-		PageBean<Goods> pageBean = new PageBean<>();
+		PageBean<Goods> pageBean = new PageBean<Goods>();
 		// 封装pageBean对象的属性
 		// 封装当前页属性
 		pageBean.setCurrentPage(currentPage);
@@ -167,26 +168,57 @@ public class GoodsService {
 	 * 后台保存商品
 	 * 
 	 * @param goods
+	 * @return
 	 */
-	public void save(Goods goods) {
-		goodsDao.save(goods);
+	public boolean save(Goods goods) {
+		if (goodsDao.save(goods)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * 后台删除商品
+	 * 
+	 * @param goods
+	 * @return
+	 */
+	public boolean delete(Goods goods) {
+		if (goodsDao.delete(goods)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * 后台修改商品信息
+	 * 
+	 * @param goods
+	 * @return
+	 */
+	public boolean update(Goods goods) {
+		if (goodsDao.update(goods)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	/**
 	 * 模糊查询
 	 * 
 	 * @param searchName
-	 * 
 	 * @param currentPage
 	 * @return
 	 */
 	public PageBean findAllGoodsByName(String searchName, Integer currentPage) {
-		// 封装PageBean对象
 		PageBean pageBean = new PageBean();
 		pageBean.setCurrentPage(currentPage);
-		int pageSize = 15;
+		int pageSize = 10;
 		pageBean.setPageSize(pageSize);
-		int totalCount = goodsDao.findCountByName(searchName);
+		int totalCount = goodsDao.findGoodsByName(searchName);
 		pageBean.setTotalCount(totalCount);
 		int totalPage;
 		if (totalCount % pageSize == 0) {
@@ -196,7 +228,8 @@ public class GoodsService {
 		}
 		pageBean.setTotalPage(totalPage);
 		int startIndex = (currentPage - 1) * pageSize;
-		List<Goods> list = goodsDao.findGoodsByName(searchName, startIndex, pageSize);
+		List<Goods> list = goodsDao.findGoodsByName(searchName, startIndex,
+				pageSize);
 		pageBean.setList(list);
 		return pageBean;
 	}
